@@ -15,7 +15,7 @@
             font-family: 'Patrick Hand', 'Caveat', Arial, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            padding: 8px;
+            padding: 8px 0 8px 0;
         }
 
         .scrapbook {
@@ -92,23 +92,24 @@
             flex-direction: column;
             align-items: center;
             gap: 0px;
-            position: absolute;
-            left: 50%;
-            top: -30px;
-            transform: translateX(-50%);
+            position: relative;
+            left: 0;
+            top: 0;
+            transform: none;
             background: repeating-linear-gradient(135deg, #fffbe7 0 12px, #ffe082 12px 24px);
             border: 2.5px dashed #ffb300;
             border-radius: 18px 38px 18px 38px/28px 18px 38px 18px;
             box-shadow: 0 4px 18px rgba(255, 193, 7, 0.13), 0 1.5px 0 #fff inset;
             font-family: 'Patrick Hand', 'Permanent Marker', cursive, sans-serif;
-            font-size: 1.25em;
+            font-size: 1.1em;
             color: #7c4d00;
-            padding: 8px 28px 8px 18px;
-            margin: 0 0 18px 0;
+            padding: px 14px 16px 10px;
+            margin: 48px auto 48px auto;
             z-index: 2;
             letter-spacing: 0.5px;
             font-weight: bold;
             transition: box-shadow 0.2s;
+            max-width: 300px;
         }
         .train-line:hover {
             box-shadow: 0 8px 32px rgba(255, 193, 7, 0.22), 0 1.5px 0 #fff inset;
@@ -143,16 +144,18 @@
         }
 
         .city-name {
-            font-size: 2.1em;
-            color: #333;
-            margin-right: 12px;
-            text-shadow: 2px 2px 0px #4ecdc4;
-            font-family: 'Permanent Marker', 'Gloria Hallelujah', cursive, sans-serif;
-        }
-
-        .city-flag {
-            font-size: 2em;
-            margin-right: 15px;
+            font-size: 3em;
+            color: #2d2d2d;
+            margin: 0 0 10px 0;
+            text-shadow: 0 4px 16px #4ecdc4, 0 1px 0 #fff, 2px 2px 0 #ff6b6b;
+            font-family: 'Permanent Marker', 'Caveat', 'Gloria Hallelujah', cursive, sans-serif;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 900;
+            line-height: 1.1;
+            width: 100%;
+            display: block;
+            text-align: center;
         }
 
         .attractions-container {
@@ -200,15 +203,17 @@
         }
 
         .attraction-title {
-            font-size: 1.6em;
+            font-size: 1.3em;
             color: #222;
-            font-weight: bold;
-            text-shadow: 2px 2px 0px #4ecdc4, 1px 1px 2px rgba(76, 205, 196, 0.15);
-            font-family: 'Permanent Marker', 'Gloria Hallelujah', cursive, sans-serif;
+            font-weight: 700;
+            text-shadow: 1px 1px 0px #4ecdc4, 1px 1px 2px rgba(76, 205, 196, 0.10);
+            font-family: 'Caveat', 'Gloria Hallelujah', cursive, sans-serif;
             margin-bottom: 8px;
             line-height: 1.1;
             word-break: break-word;
             text-align: left;
+            letter-spacing: 0.5px;
+            text-transform: none;
         }
 
         .attraction-image {
@@ -315,32 +320,153 @@
         }
 
         .journey-stats {
-            background: #333;
+            background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
             color: white;
-            padding: 24px 4vw;
-            text-align: center;
+            padding: 32px 4vw;
             margin-top: 32px;
-            border-radius: 15px;
+            border-radius: 20px;
+            position: relative;
+            transform: rotate(-0.3deg);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            border: 4px solid #4ecdc4;
+            overflow: hidden;
+        }
+        
+        .stats-tape {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 3px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+        }
+        
+        .stats-tape1 {
+            width: 100px;
+            height: 35px;
+            top: -17px;
+            left: 60px;
+            transform: rotate(-15deg);
+        }
+        
+        .stats-tape2 {
+            width: 80px;
+            height: 30px;
+            bottom: -15px;
+            right: 80px;
+            transform: rotate(20deg);
+        }
+        
+        .stats-header {
+            text-align: center;
+            margin-bottom: 32px;
+            position: relative;
+        }
+        
+        .stats-header h2 {
+            font-size: 2.2em;
+            margin: 0;
+            text-shadow: 3px 3px 0px rgba(78, 205, 196, 0.8), 2px 2px 0 #ff6b6b;
+            font-family: 'Permanent Marker', 'Gloria Hallelujah', cursive, sans-serif;
+            letter-spacing: 1px;
+            color: white;
+        }
+        
+        .stats-emoji {
+            font-size: 2em;
+            display: inline-block;
+            animation: bounce 2s infinite;
+            margin: 0 15px;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
         }
 
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 32px 0;
         }
 
         .stat-item {
-            background: rgba(255,255,255,0.1);
-            padding: 20px;
-            border-radius: 10px;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            position: relative;
+            transform: rotate(-1deg);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 3px solid #ff6b6b;
+            text-align: center;
+        }
+        
+        .stat-item:nth-child(even) {
+            transform: rotate(1deg);
+            border-color: #4ecdc4;
+        }
+        
+        .stat-item:nth-child(3n) {
+            border-color: #ffb74d;
+        }
+        
+        .stat-item:hover {
+            transform: rotate(0deg) scale(1.05);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.3);
+        }
+        
+        .stat-icon {
+            font-size: 2.5em;
+            margin-bottom: 12px;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.1));
         }
 
         .stat-number {
-            font-size: 1.5em;
-            font-weight: bold;
-            color: #4ecdc4;
+            font-size: 2.8em;
+            font-weight: 900;
+            color: #2d2d2d;
             font-family: 'Permanent Marker', 'Gloria Hallelujah', cursive, sans-serif;
+            text-shadow: 2px 2px 0px #4ecdc4, 1px 1px 2px rgba(78, 205, 196, 0.3);
+            margin-bottom: 8px;
+            line-height: 1;
+        }
+        
+        .stat-label {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 8px;
+            font-family: 'Caveat', 'Gloria Hallelujah', cursive, sans-serif;
+        }
+        
+        .stat-detail {
+            font-size: 0.9em;
+            color: #666;
+            line-height: 1.4;
+            font-style: italic;
+        }
+        
+        .stats-footer {
+            text-align: center;
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 2px dashed #4ecdc4;
+        }
+        
+        .stats-quote {
+            font-size: 1.4em;
+            font-family: 'Caveat', 'Gloria Hallelujah', cursive, sans-serif;
+            font-weight: 700;
+            color: #4ecdc4;
+            margin-bottom: 12px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        .stats-subtext {
+            font-size: 1em;
+            opacity: 0.9;
+            color: #fff;
         }
 
         @media (max-width: 900px) {
@@ -359,7 +485,26 @@
                 padding: 12px 2vw;
             }
             .journey-stats {
-                padding: 12px 2vw;
+                padding: 20px 2vw;
+                transform: rotate(0deg);
+                margin-top: 24px;
+            }
+            .stats-header h2 {
+                font-size: 1.8em;
+            }
+            .stats-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+                margin: 24px 0;
+            }
+            .stat-item {
+                padding: 20px;
+            }
+            .stat-number {
+                font-size: 2.2em;
+            }
+            .stats-tape1, .stats-tape2 {
+                display: none;
             }
         }
         @media (max-width: 900px) {
@@ -393,7 +538,11 @@
                 font-size: 1.3em;
             }
             .city-name {
-                font-size: 1.1em;
+                font-size: 2.1em;
+                width: 100vw;
+                margin: 0 0 10px 0;
+                text-align: center;
+                padding: 0 0 0 0;
             }
             .attraction-title {
                 font-size: 1em;
@@ -402,14 +551,65 @@
                 font-size: 1em;
             }
             .attraction-image {
-                width: 100%;
-                max-width: 100vw;
+                width: 50% !important;
+                max-width: 180px !important;
                 height: auto;
-                margin: 0 0 12px 0;
+                margin: 0 auto 12px auto !important;
                 display: block;
             }
             .food-section {
                 padding: 10px 2vw !important;
+            }
+            .food-grid {
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                justify-content: center !important;
+                gap: 15px !important;
+            }
+            /* mobile: square food thumbnails */
+            .food-grid img {
+                width: 150px !important;
+                height: 150px !important;
+                object-fit: cover !important;
+                margin: 0 auto !important;
+            }
+            /* Stats responsive styles */
+            .stats-header h2 {
+                font-size: 1.4em;
+            }
+            .stats-emoji {
+                font-size: 1.5em;
+                margin: 0 8px;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            .stat-item {
+                padding: 18px;
+                transform: rotate(0deg) !important;
+            }
+            .stat-number {
+                font-size: 2em;
+            }
+            .stat-label {
+                font-size: 1.1em;
+            }
+            .stats-quote {
+                font-size: 1.2em;
+            }
+        }
+        /* desktop: match attraction images and enlarge food titles */
+        @media (min-width: 601px) {
+            .food-grid img {
+                width: 320px !important;
+                height: auto !important;
+                aspect-ratio: 4/3 !important;
+                object-fit: cover !important;
+            }
+            .food-section h3 {
+                font-size: 1.5em !important;
             }
         }
         @media (max-width: 400px) {
@@ -423,6 +623,14 @@
             }
         }
         /* Fun scrapbook font from Google Fonts */
+
+    /* Make food images square and fixed size */
+    .food-grid img {
+        width: 150px !important;
+        height: 150px !important;
+        object-fit: cover !important;
+        margin: 0 auto !important;
+    }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Patrick+Hand&family=Caveat:wght@700&display=swap" rel="stylesheet">
 </head>
@@ -436,16 +644,16 @@
 
         <div class="journey-container">
         <div id="image-zoom-help" style="background: #fffbe7; color: #856404; border-left: 5px solid #ffc107; padding: 12px 20px 12px 20px; border-radius: 0 0 12px 12px; font-size: 1.1em; margin-bottom: 38px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); max-width: 520px; margin-left: auto; margin-right: auto; text-align: center;">
-            FYI, you can tap on an image to zoom in!
+            FYI, you can tap an image to zoom in!
         </div>
+                    <div class="train-line">
+                <span class="train-emoji">🚂</span> Start: Milan
+            </div>
             <div class="city-stop">
-                <div class="train-line"><span class="train-emoji">🚂</span>Start Here!
 
-                </div>
                 <div class="tape tape1"></div>
                 <div class="city-header">
-                    <span class="city-flag">🇮🇹</span>
-                    <h2 class="city-name">Milan</h2>
+                    <h2 class="city-name">🇮🇹 Milan</h2>
                 </div>
                 <div class="attractions-container">
                     <div class="attraction-card">
@@ -511,14 +719,15 @@
                 <div class="tape tape2"></div>
             </div>
 
+                        <div class="train-line">
+                <span class="train-emoji">🚂</span> 1.5h Journey: Milan → Verona
+            </div>
             <div class="city-stop">
-                <div class="train-line"><span class="train-emoji">🚂</span>1.5h Journey
+            <!-- Journey 1 -->
 
-                </div>
                 <div class="tape tape1"></div>
                 <div class="city-header">
-                    <span class="city-flag">🇮🇹</span>
-                    <h2 class="city-name">Verona</h2>
+                    <h2 class="city-name">🇮🇹 Verona</h2>
                 </div>
                 <div class="attractions-container">
                     <div class="attraction-card">
@@ -582,14 +791,15 @@
                 <div class="tape tape2"></div>
             </div>
 
+                        <div class="train-line">
+                <span class="train-emoji">🚂</span> 2h Journey: Verona → Trento
+            </div>
             <div class="city-stop">
-                <div class="train-line"><span class="train-emoji">🚂</span>2h Journey
+            <!-- Journey 2 -->
 
-                </div>
                 <div class="tape tape1"></div>
                 <div class="city-header">
-                    <span class="city-flag">🇮🇹</span>
-                    <h2 class="city-name">Trento</h2>
+                    <h2 class="city-name">🇮🇹 Trento</h2>
                     <span style="background: #ff6b6b; color: white; padding: 5px 10px; border-radius: 15px; font-size: 0.8em;">Day Trip</span>
                 </div>
                 <div class="attractions-container">
@@ -655,14 +865,15 @@
                 <div class="tape tape2"></div>
             </div>
 
+                        <div class="train-line">
+                <span class="train-emoji">🚂</span> 3h Journey: Trento → Innsbruck
+            </div>
             <div class="city-stop">
-                <div class="train-line"><span class="train-emoji">🚂</span>3h Journey
+            <!-- Journey 3 -->
 
-                </div>
                 <div class="tape tape1"></div>
                 <div class="city-header">
-                    <span class="city-flag">🇦🇹</span>
-                    <h2 class="city-name">Innsbruck</h2>
+                    <h2 class="city-name">🇦🇹 Innsbruck</h2>
                 </div>
                 <div class="attractions-container">
                     <div class="attraction-card">
@@ -733,15 +944,15 @@
                 </div>
                 <div class="tape tape2"></div>
             </div>
-
+            <div class="train-line" style="margin: 32px auto 16px auto; max-width: 260px; font-size: 1.1em; background: #fffbe7; border: 2.5px solid #ffb300; border-radius: 18px; text-align: center; padding: 10px 0; box-shadow: 0 4px 18px rgba(255, 193, 7, 0.13);">
+                <span class="train-emoji">🚂</span> 2h Journey: Innsbruck → Munich
+            </div>
             <div class="city-stop">
-                <div class="train-line"><span class="train-emoji">🚂</span>2h Journey
+            <!-- Journey 4 -->
 
-                </div>
                 <div class="tape tape1"></div>
                 <div class="city-header">
-                    <span class="city-flag">🇩🇪</span>
-                    <h2 class="city-name">Munich</h2>
+                    <h2 class="city-name">🇩🇪 Munich</h2>
                 </div>
                 <div class="attractions-container">
                     <div class="attraction-card">
@@ -806,15 +1017,15 @@
                 </div>
                 <div class="tape tape2"></div>
             </div>
-
+            <div class="train-line" style="margin: 32px auto 16px auto; max-width: 260px; font-size: 1.1em; background: #fffbe7; border: 2.5px solid #ffb300; border-radius: 18px; text-align: center; padding: 10px 0; box-shadow: 0 4px 18px rgba(255, 193, 7, 0.13);">
+                <span class="train-emoji">🚂</span> 2h Journey: Munich → Salzburg
+            </div>
             <div class="city-stop">
-                <div class="train-line"><span class="train-emoji">🚂</span>2h Journey
+            <!-- Journey 5 -->
 
-                </div>
                 <div class="tape tape1"></div>
                 <div class="city-header">
-                    <span class="city-flag">🇦🇹</span>
-                    <h2 class="city-name">Salzburg</h2>
+                    <h2 class="city-name">🇦🇹 Salzburg</h2>
                 </div>
                 <div class="attractions-container">
                     <div class="attraction-card">
@@ -879,15 +1090,15 @@
                 </div>
                 <div class="tape tape2"></div>
             </div>
-
+            <div class="train-line" style="margin: 32px auto 16px auto; max-width: 260px; font-size: 1.1em; background: #fffbe7; border: 2.5px solid #ffb300; border-radius: 18px; text-align: center; padding: 10px 0; box-shadow: 0 4px 18px rgba(255, 193, 7, 0.13);">
+                <span class="train-emoji">🚂</span> 3h Final Journey: Salzburg → Vienna
+            </div>
             <div class="city-stop">
-                <div class="train-line"><span class="train-emoji">🚂</span>3h Final Journey
+            <!-- Journey 6 -->
 
-                </div>
                 <div class="tape tape1"></div>
                 <div class="city-header">
-                    <span class="city-flag">🇦🇹</span>
-                    <h2 class="city-name">Vienna</h2>
+                    <h2 class="city-name">🇦🇹 Vienna</h2>
                 </div>
                 <div class="attractions-container">
                     <div class="attraction-card">
@@ -960,26 +1171,66 @@
             </div>
 
             <div class="journey-stats">
-                <h2>🚂 Your Epic Journey Stats</h2>
+                <div class="stats-tape stats-tape1"></div>
+                <div class="stats-tape stats-tape2"></div>
+                <div class="stats-header">
+                    <span class="stats-emoji">📊</span>
+                    <h2>Epic Journey by the Numbers!</h2>
+                    <span class="stats-emoji">🎯</span>
+                </div>
+                
                 <div class="stats-grid">
                     <div class="stat-item">
+                        <div class="stat-icon">🚂</div>
                         <div class="stat-number">7</div>
-                        <div>Amazing Cities</div>
+                        <div class="stat-label">Cities Explored</div>
+                        <div class="stat-detail">Milan → Verona → Trento → Innsbruck → Munich → Salzburg → Vienna</div>
                     </div>
+                    
                     <div class="stat-item">
-                        <div class="stat-number">15.5</div>
-                        <div>Hours of Train Travel</div>
+                        <div class="stat-icon">⏰</div>
+                        <div class="stat-number">11.5h</div>
+                        <div class="stat-label">Train Travel Time</div>
+                        <div class="stat-detail">Pure scenic bliss on rails!</div>
                     </div>
+                    
                     <div class="stat-item">
-                        <div class="stat-number">4</div>
-                        <div>Countries Explored</div>
+                        <div class="stat-icon">🏰</div>
+                        <div class="stat-number">6</div>
+                        <div class="stat-label">Epic Castles & Palaces</div>
+                        <div class="stat-detail">From medieval to fairy-tale</div>
                     </div>
+                    
                     <div class="stat-item">
-                        <div class="stat-number">∞</div>
-                        <div>Memories to Make</div>
+                        <div class="stat-icon">🍽️</div>
+                        <div class="stat-number">15+</div>
+                        <div class="stat-label">Local Delicacies</div>
+                        <div class="stat-detail">Risotto, schnitzel & strudel!</div>
+                    </div>
+                    
+                    <div class="stat-item">
+                        <div class="stat-icon">🎭</div>
+                        <div class="stat-number">18</div>
+                        <div class="stat-label">Amazing Attractions</div>
+                        <div class="stat-detail">From cathedrals to cable cars</div>
+                    </div>
+                    
+                    <div class="stat-item">
+                        <div class="stat-icon">🎵</div>
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Musical Legends</div>
+                        <div class="stat-detail">Mozart, La Scala & Sound of Music</div>
                     </div>
                 </div>
-                <p style="margin-top: 20px; opacity: 0.8;">From Italian glamour to Alpine adventures to imperial grandeur - this train journey has it all!</p>
+                
+                <div class="stats-footer">
+                    <div class="stats-quote">
+                        "✨ Adventures are the best way to learn ✨"
+                    </div>
+                    <div class="stats-subtext">
+                        An unforgettable journey through the heart of Europe! 🇮🇹🇦🇹🇩🇪
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -1089,8 +1340,8 @@
                 e.stopPropagation();
             });
 
-            // Add click listeners to all .attraction-image
-            document.querySelectorAll('.attraction-image').forEach(img => {
+            // Add click listeners to all .attraction-image and .zoomable-image
+document.querySelectorAll('.attraction-image, .zoomable-image, .food-grid img').forEach(img => {
                 img.style.cursor = 'zoom-in';
                 img.addEventListener('click', function(e) {
                     e.stopPropagation();
