@@ -1,1548 +1,2502 @@
 <!DOCTYPE html>
+
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>European Train Adventure 🚂</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        body {
-            font-family: 'Patrick Hand', 'Caveat', Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 8px 0 8px 0;
-        }
+      body {
+        font-family: "Patrick Hand", "Caveat", Arial, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 8px 0 8px 0;
+      }
 
+      .scrapbook {
+        max-width: 100vw;
+        width: 100%;
+        margin: 0 auto;
+        background: #f9f7f4;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        position: relative;
+      }
+
+      .header {
+        background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+        color: white;
+        padding: 40px 10vw 50px 10vw;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        border-radius: 0 0 25px 25px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      /* Decorative corner stickers */
+      .header::before {
+        content: "🚂";
+        font-size: 60px;
+        position: absolute;
+        top: 20px;
+        left: 50px;
+        animation: chugChug 3s infinite;
+        filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+      }
+
+      .header::after {
+        content: "✈️";
+        font-size: 45px;
+        position: absolute;
+        top: 25px;
+        right: 60px;
+        animation: float 4s ease-in-out infinite;
+        filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+      }
+
+      @keyframes chugChug {
+        0%,
+        100% {
+          transform: translateX(0) rotate(-5deg);
+        }
+        50% {
+          transform: translateX(10px) rotate(5deg);
+        }
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0) rotate(-3deg);
+        }
+        50% {
+          transform: translateY(-8px) rotate(3deg);
+        }
+      }
+
+      .header h1 {
+        font-size: 3.2em;
+        margin-bottom: 15px;
+        text-shadow: 4px 4px 0px rgba(0, 0, 0, 0.4), 2px 2px 0px #fff,
+          6px 6px 12px rgba(0, 0, 0, 0.2);
+        font-family: "Permanent Marker", "Gloria Hallelujah", cursive,
+          sans-serif;
+        letter-spacing: 2px;
+        transform: rotate(-1deg);
+        position: relative;
+        display: inline-block;
+      }
+
+      .header p {
+        font-size: 1.3em;
+        opacity: 0.95;
+        transform: rotate(0.5deg);
+        font-family: "Caveat", "Patrick Hand", cursive, sans-serif;
+        font-weight: 700;
+        text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.3);
+        margin-top: 8px;
+      }
+
+      /* Scrapbook decorative elements */
+      .scrapbook-sticker {
+        position: absolute;
+        font-size: 2.5em;
+        z-index: 10;
+        filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+      }
+
+      .sticker-1 {
+        content: "🗺️";
+        top: 75%;
+        left: 15%;
+        animation: wiggle 3s ease-in-out infinite;
+        transform: rotate(-15deg);
+      }
+
+      .sticker-2 {
+        content: "🎒";
+        top: 70%;
+        right: 18%;
+        animation: bounce 2s ease-in-out infinite;
+        transform: rotate(20deg);
+      }
+
+      .sticker-3 {
+        content: "📸";
+        bottom: 15px;
+        left: 35%;
+        animation: pulse 2.5s ease-in-out infinite;
+        transform: rotate(-8deg);
+      }
+
+      .sticker-4 {
+        content: "🎫";
+        bottom: 20px;
+        right: 30%;
+        animation: wiggle 4s ease-in-out infinite;
+        transform: rotate(12deg);
+      }
+
+      @keyframes wiggle {
+        0%,
+        100% {
+          transform: rotate(-15deg) translateX(0);
+        }
+        25% {
+          transform: rotate(-12deg) translateX(2px);
+        }
+        75% {
+          transform: rotate(-18deg) translateX(-2px);
+        }
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: rotate(-8deg) scale(1);
+        }
+        50% {
+          transform: rotate(-8deg) scale(1.1);
+        }
+      }
+
+      /* Washi tape decorative strips */
+      .washi-tape {
+        position: absolute;
+        height: 8px;
+        background: repeating-linear-gradient(
+          45deg,
+          #ffeb3b,
+          #ffeb3b 10px,
+          #ff9800 10px,
+          #ff9800 20px
+        );
+        opacity: 0.8;
+        z-index: 5;
+      }
+
+      .washi-tape-1 {
+        top: 0;
+        left: 20%;
+        width: 25%;
+        transform: rotate(-2deg);
+      }
+
+      .washi-tape-2 {
+        bottom: 0;
+        right: 15%;
+        width: 30%;
+        transform: rotate(1deg);
+        background: repeating-linear-gradient(
+          45deg,
+          #e91e63,
+          #e91e63 8px,
+          #fff 8px,
+          #fff 16px
+        );
+      }
+
+      .journey-container {
+        padding: 32px 4vw;
+      }
+
+      .city-stop {
+        margin-bottom: 48px;
+        position: relative;
+        background: white;
+        border-radius: 15px;
+        padding: 22px 4vw;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transform: rotate(-0.5deg);
+        transition: transform 0.3s ease;
+      }
+
+      .city-stop:nth-child(even) {
+        transform: rotate(0.5deg);
+      }
+
+      .city-stop:hover {
+        transform: rotate(0deg) scale(1.02);
+      }
+
+      .train-line {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0px;
+        position: relative;
+        left: 0;
+        top: 0;
+        transform: none;
+        background: repeating-linear-gradient(
+          135deg,
+          #fffbe7 0 12px,
+          #ffe082 12px 24px
+        );
+        border: 2.5px dashed #ffb300;
+        border-radius: 18px 38px 18px 38px/28px 18px 38px 18px;
+        box-shadow: 0 4px 18px rgba(255, 193, 7, 0.13), 0 1.5px 0 #fff inset;
+        font-family: "Patrick Hand", "Permanent Marker", cursive, sans-serif;
+        font-size: 1.1em;
+        color: #7c4d00;
+        padding: px 14px 16px 10px;
+        margin: 48px auto 48px auto;
+        z-index: 2;
+        letter-spacing: 0.5px;
+        font-weight: bold;
+        transition: box-shadow 0.2s;
+        max-width: 300px;
+      }
+      .train-line:hover {
+        box-shadow: 0 8px 32px rgba(255, 193, 7, 0.22), 0 1.5px 0 #fff inset;
+      }
+      .train-emoji {
+        display: inline-block;
+        font-size: 1.3em;
+        animation: chugChug 0.7s infinite alternate cubic-bezier(0.7, 0, 0.3, 1);
+        margin-right: 4px;
+        filter: drop-shadow(0 1.5px 0 #fffbe7);
+      }
+      @keyframes chugChug {
+        0% {
+          transform: translateY(0) rotate(-3deg);
+        }
+        100% {
+          transform: translateY(-4px) rotate(3deg);
+        }
+      }
+      .train-track {
+        display: block;
+        width: 110px;
+        height: 12px;
+        margin-top: 0px;
+        margin-bottom: 2px;
+        pointer-events: none;
+        align-self: center;
+      }
+
+      .city-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 18px;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .city-name {
+        font-size: 3em;
+        color: #2d2d2d;
+        margin: 0 0 10px 0;
+        text-shadow: 0 4px 16px #4ecdc4, 0 1px 0 #fff, 2px 2px 0 #ff6b6b;
+        font-family: "Permanent Marker", "Caveat", "Gloria Hallelujah", cursive,
+          sans-serif;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        font-weight: 900;
+        line-height: 1.1;
+        width: 100%;
+        display: block;
+        text-align: center;
+      }
+
+      .attractions-container {
+        margin-bottom: 30px;
+      }
+
+      .attraction-card {
+        background: white;
+        margin: 25px 0;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        position: relative;
+        transform: rotate(-0.3deg);
+        transition: transform 0.3s ease;
+        border: 3px solid #4ecdc4;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 18px;
+      }
+
+      .attraction-card:nth-child(even) {
+        transform: rotate(0.4deg);
+        border-color: #ff6b6b;
+      }
+
+      .attraction-card:hover {
+        transform: rotate(0deg) scale(1.02);
+      }
+
+      .attraction-header {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        margin-bottom: 0;
+        flex-wrap: wrap;
+        gap: 12px;
+        padding-bottom: 0;
+      }
+
+      .attraction-icon {
+        font-size: 2.5em;
+        margin-right: 10px;
+      }
+
+      .attraction-title {
+        font-size: 1.3em;
+        color: #222;
+        font-weight: 700;
+        text-shadow: 1px 1px 0px #4ecdc4, 1px 1px 2px rgba(76, 205, 196, 0.1);
+        font-family: "Caveat", "Gloria Hallelujah", cursive, sans-serif;
+        margin-bottom: 8px;
+        line-height: 1.1;
+        word-break: break-word;
+        text-align: left;
+        letter-spacing: 0.5px;
+        text-transform: none;
+      }
+
+      .attraction-image {
+        width: 320px;
+        max-width: 48vw;
+        height: auto;
+        aspect-ratio: 4/3;
+        object-fit: cover;
+        border-radius: 12px;
+        margin-left: 0;
+        margin-bottom: 0;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        border: 4px solid white;
+        display: block;
+        flex-shrink: 0;
+      }
+
+      .attraction-description {
+        line-height: 1.6;
+        color: #555;
+        font-size: 1em;
+        text-align: justify;
+      }
+
+      .side-quest-card {
+        background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+        color: white;
+        margin: 30px 0;
+        padding: 25px;
+        border-radius: 20px;
+        position: relative;
+        transform: rotate(1deg);
+        box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+        border: 4px dashed white;
+      }
+
+      .side-quest-card:hover {
+        transform: rotate(0deg) scale(1.03);
+      }
+
+      .side-quest-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+        font-size: 1.3em;
+        font-weight: bold;
+        font-family: "Permanent Marker", "Gloria Hallelujah", cursive,
+          sans-serif;
+      }
+
+      .side-quest-header::before {
+        content: "🎯";
+        font-size: 1.2em;
+        margin-right: 15px;
+      }
+
+      .side-quest-description {
+        font-size: 1.1em;
+        line-height: 1.6;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+      }
+
+      .polaroid-tape {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.9);
+        width: 60px;
+        height: 20px;
+        border-radius: 2px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        top: -10px;
+        right: 30px;
+        transform: rotate(25deg);
+      }
+
+      .polaroid-tape::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80%;
+        height: 2px;
+        background: rgba(0, 0, 0, 0.1);
+      }
+
+      .tape {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.8);
+        width: 80px;
+        height: 30px;
+        border-radius: 3px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      }
+
+      .tape1 {
+        top: -15px;
+        right: 20px;
+        transform: rotate(15deg);
+      }
+
+      .tape2 {
+        bottom: -15px;
+        left: 30px;
+        transform: rotate(-10deg);
+      }
+
+      .journey-stats {
+        background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+        color: white;
+        padding: 32px 4vw;
+        margin-top: 32px;
+        border-radius: 20px;
+        position: relative;
+        transform: rotate(-0.3deg);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        border: 4px solid #4ecdc4;
+        overflow: hidden;
+      }
+
+      .stats-tape {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 3px;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+      }
+
+      .stats-tape1 {
+        width: 100px;
+        height: 35px;
+        top: -17px;
+        left: 60px;
+        transform: rotate(-15deg);
+      }
+
+      .stats-tape2 {
+        width: 80px;
+        height: 30px;
+        bottom: -15px;
+        right: 80px;
+        transform: rotate(20deg);
+      }
+
+      .stats-header {
+        text-align: center;
+        margin-bottom: 32px;
+        position: relative;
+      }
+
+      .stats-header h2 {
+        font-size: 2.2em;
+        margin: 0;
+        text-shadow: 3px 3px 0px rgba(78, 205, 196, 0.8), 2px 2px 0 #ff6b6b;
+        font-family: "Permanent Marker", "Gloria Hallelujah", cursive,
+          sans-serif;
+        letter-spacing: 1px;
+        color: white;
+      }
+
+      .stats-emoji {
+        font-size: 2em;
+        display: inline-block;
+        animation: bounce 2s infinite;
+        margin: 0 15px;
+      }
+
+      @keyframes bounce {
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
+          transform: translateY(0);
+        }
+        40% {
+          transform: translateY(-10px);
+        }
+        60% {
+          transform: translateY(-5px);
+        }
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+        margin: 32px 0;
+      }
+
+      .stat-item {
+        background: white;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        position: relative;
+        transform: rotate(-1deg);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 3px solid #ff6b6b;
+        text-align: center;
+      }
+
+      .stat-item:nth-child(even) {
+        transform: rotate(1deg);
+        border-color: #4ecdc4;
+      }
+
+      .stat-item:nth-child(3n) {
+        border-color: #ffb74d;
+      }
+
+      .stat-item:hover {
+        transform: rotate(0deg) scale(1.05);
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+      }
+
+      .stat-icon {
+        font-size: 2.5em;
+        margin-bottom: 12px;
+        filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.1));
+      }
+
+      .stat-number {
+        font-size: 2.8em;
+        font-weight: 900;
+        color: #2d2d2d;
+        font-family: "Permanent Marker", "Gloria Hallelujah", cursive,
+          sans-serif;
+        text-shadow: 2px 2px 0px #4ecdc4, 1px 1px 2px rgba(78, 205, 196, 0.3);
+        margin-bottom: 8px;
+        line-height: 1;
+      }
+
+      .stat-label {
+        font-size: 1.2em;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 8px;
+        font-family: "Caveat", "Gloria Hallelujah", cursive, sans-serif;
+      }
+
+      .stat-detail {
+        font-size: 0.9em;
+        color: #666;
+        line-height: 1.4;
+        font-style: italic;
+      }
+
+      .stats-footer {
+        text-align: center;
+        margin-top: 32px;
+        padding-top: 24px;
+        border-top: 2px dashed #4ecdc4;
+      }
+
+      .stats-quote {
+        font-size: 1.4em;
+        font-family: "Caveat", "Gloria Hallelujah", cursive, sans-serif;
+        font-weight: 700;
+        color: #4ecdc4;
+        margin-bottom: 12px;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+      }
+
+      .stats-subtext {
+        font-size: 1em;
+        opacity: 0.9;
+        color: #fff;
+      }
+
+      @media (max-width: 900px) {
         .scrapbook {
-            max-width: 100vw;
-            width: 100%;
-            margin: 0 auto;
-            background: #f9f7f4;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            overflow: hidden;
-            position: relative;
+          border-radius: 0;
+          max-width: 100vw;
+          width: 100vw;
         }
-
         .header {
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-            color: white;
-            padding: 40px 10vw 50px 10vw;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            border-radius: 0 0 25px 25px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+          padding: 25px 2vw 35px 2vw;
         }
-
-        /* Decorative corner stickers */
-        .header::before {
-            content: "🚂";
-            font-size: 60px;
-            position: absolute;
-            top: 20px;
-            left: 50px;
-            animation: chugChug 3s infinite;
-            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
-        }
-
-        .header::after {
-            content: "✈️";
-            font-size: 45px;
-            position: absolute;
-            top: 25px;
-            right: 60px;
-            animation: float 4s ease-in-out infinite;
-            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
-        }
-
-        @keyframes chugChug {
-            0%, 100% { transform: translateX(0) rotate(-5deg); }
-            50% { transform: translateX(10px) rotate(5deg); }
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(-3deg); }
-            50% { transform: translateY(-8px) rotate(3deg); }
-        }
-
         .header h1 {
-            font-size: 3.2em;
-            margin-bottom: 15px;
-            text-shadow: 4px 4px 0px rgba(0,0,0,0.4), 2px 2px 0px #fff, 6px 6px 12px rgba(0,0,0,0.2);
-            font-family: 'Permanent Marker', 'Gloria Hallelujah', cursive, sans-serif;
-            letter-spacing: 2px;
-            transform: rotate(-1deg);
-            position: relative;
-            display: inline-block;
+          font-size: 2.2em;
         }
-
         .header p {
-            font-size: 1.3em;
-            opacity: 0.95;
-            transform: rotate(0.5deg);
-            font-family: 'Caveat', 'Patrick Hand', cursive, sans-serif;
-            font-weight: 700;
-            text-shadow: 2px 2px 0px rgba(0,0,0,0.3);
-            margin-top: 8px;
+          font-size: 1.1em;
         }
-
-        /* Scrapbook decorative elements */
+        .header::before {
+          font-size: 45px;
+          top: 15px;
+          left: 25px;
+        }
+        .header::after {
+          font-size: 35px;
+          top: 20px;
+          right: 30px;
+        }
         .scrapbook-sticker {
-            position: absolute;
-            font-size: 2.5em;
-            z-index: 10;
-            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+          font-size: 2em;
         }
-
-        .sticker-1 {
-            content: "🗺️";
-            top: 75%;
-            left: 15%;
-            animation: wiggle 3s ease-in-out infinite;
-            transform: rotate(-15deg);
-        }
-
+        .sticker-1,
         .sticker-2 {
-            content: "🎒";
-            top: 70%;
-            right: 18%;
-            animation: bounce 2s ease-in-out infinite;
-            transform: rotate(20deg);
+          top: 80%;
         }
-
-        .sticker-3 {
-            content: "📸";
-            bottom: 15px;
-            left: 35%;
-            animation: pulse 2.5s ease-in-out infinite;
-            transform: rotate(-8deg);
-        }
-
-        .sticker-4 {
-            content: "🎫";
-            bottom: 20px;
-            right: 30%;
-            animation: wiggle 4s ease-in-out infinite;
-            transform: rotate(12deg);
-        }
-
-        @keyframes wiggle {
-            0%, 100% { transform: rotate(-15deg) translateX(0); }
-            25% { transform: rotate(-12deg) translateX(2px); }
-            75% { transform: rotate(-18deg) translateX(-2px); }
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: rotate(-8deg) scale(1); }
-            50% { transform: rotate(-8deg) scale(1.1); }
-        }
-
-        /* Washi tape decorative strips */
         .washi-tape {
-            position: absolute;
-            height: 8px;
-            background: repeating-linear-gradient(
-                45deg,
-                #ffeb3b,
-                #ffeb3b 10px,
-                #ff9800 10px,
-                #ff9800 20px
-            );
-            opacity: 0.8;
-            z-index: 5;
+          height: 6px;
         }
-
-        .washi-tape-1 {
-            top: 0;
-            left: 20%;
-            width: 25%;
-            transform: rotate(-2deg);
-        }
-
-        .washi-tape-2 {
-            bottom: 0;
-            right: 15%;
-            width: 30%;
-            transform: rotate(1deg);
-            background: repeating-linear-gradient(
-                45deg,
-                #e91e63,
-                #e91e63 8px,
-                #fff 8px,
-                #fff 16px
-            );
-        }
-
         .journey-container {
-            padding: 32px 4vw;
+          padding: 12px 2vw;
         }
-
         .city-stop {
-            margin-bottom: 48px;
-            position: relative;
-            background: white;
-            border-radius: 15px;
-            padding: 22px 4vw;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transform: rotate(-0.5deg);
-            transition: transform 0.3s ease;
+          padding: 12px 2vw;
         }
-
-        .city-stop:nth-child(even) {
-            transform: rotate(0.5deg);
-        }
-
-        .city-stop:hover {
-            transform: rotate(0deg) scale(1.02);
-        }
-
-        .train-line {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0px;
-            position: relative;
-            left: 0;
-            top: 0;
-            transform: none;
-            background: repeating-linear-gradient(135deg, #fffbe7 0 12px, #ffe082 12px 24px);
-            border: 2.5px dashed #ffb300;
-            border-radius: 18px 38px 18px 38px/28px 18px 38px 18px;
-            box-shadow: 0 4px 18px rgba(255, 193, 7, 0.13), 0 1.5px 0 #fff inset;
-            font-family: 'Patrick Hand', 'Permanent Marker', cursive, sans-serif;
-            font-size: 1.1em;
-            color: #7c4d00;
-            padding: px 14px 16px 10px;
-            margin: 48px auto 48px auto;
-            z-index: 2;
-            letter-spacing: 0.5px;
-            font-weight: bold;
-            transition: box-shadow 0.2s;
-            max-width: 300px;
-        }
-        .train-line:hover {
-            box-shadow: 0 8px 32px rgba(255, 193, 7, 0.22), 0 1.5px 0 #fff inset;
-        }
-        .train-emoji {
-            display: inline-block;
-            font-size: 1.3em;
-            animation: chugChug 0.7s infinite alternate cubic-bezier(.7,0,.3,1);
-            margin-right: 4px;
-            filter: drop-shadow(0 1.5px 0 #fffbe7);
-        }
-        @keyframes chugChug {
-            0% { transform: translateY(0) rotate(-3deg); }
-            100% { transform: translateY(-4px) rotate(3deg); }
-        }
-        .train-track {
-            display: block;
-            width: 110px;
-            height: 12px;
-            margin-top: 0px;
-            margin-bottom: 2px;
-            pointer-events: none;
-            align-self: center;
-        }
-
-        .city-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 18px;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .city-name {
-            font-size: 3em;
-            color: #2d2d2d;
-            margin: 0 0 10px 0;
-            text-shadow: 0 4px 16px #4ecdc4, 0 1px 0 #fff, 2px 2px 0 #ff6b6b;
-            font-family: 'Permanent Marker', 'Caveat', 'Gloria Hallelujah', cursive, sans-serif;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            font-weight: 900;
-            line-height: 1.1;
-            width: 100%;
-            display: block;
-            text-align: center;
-        }
-
-        .attractions-container {
-            margin-bottom: 30px;
-        }
-
-        .attraction-card {
-            background: white;
-            margin: 25px 0;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-            position: relative;
-            transform: rotate(-0.3deg);
-            transition: transform 0.3s ease;
-            border: 3px solid #4ecdc4;
-            display: flex;
-            flex-direction: column;
-            align-items: stretch;
-            gap: 18px;
-        }
-
-        .attraction-card:nth-child(even) {
-            transform: rotate(0.4deg);
-            border-color: #ff6b6b;
-        }
-
-        .attraction-card:hover {
-            transform: rotate(0deg) scale(1.02);
-        }
-
-        .attraction-header {
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            margin-bottom: 0;
-            flex-wrap: wrap;
-            gap: 12px;
-            padding-bottom: 0;
-        }
-
-        .attraction-icon {
-            font-size: 2.5em;
-            margin-right: 10px;
-        }
-
-        .attraction-title {
-            font-size: 1.3em;
-            color: #222;
-            font-weight: 700;
-            text-shadow: 1px 1px 0px #4ecdc4, 1px 1px 2px rgba(76, 205, 196, 0.10);
-            font-family: 'Caveat', 'Gloria Hallelujah', cursive, sans-serif;
-            margin-bottom: 8px;
-            line-height: 1.1;
-            word-break: break-word;
-            text-align: left;
-            letter-spacing: 0.5px;
-            text-transform: none;
-        }
-
-        .attraction-image {
-            width: 320px;
-            max-width: 48vw;
-            height: auto;
-            aspect-ratio: 4/3;
-            object-fit: cover;
-            border-radius: 12px;
-            margin-left: 0;
-            margin-bottom: 0;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            border: 4px solid white;
-            display: block;
-            flex-shrink: 0;
-        }
-
-        .attraction-description {
-            line-height: 1.6;
-            color: #555;
-            font-size: 1em;
-            text-align: justify;
-        }
-
-        .side-quest-card {
-            background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
-            color: white;
-            margin: 30px 0;
-            padding: 25px;
-            border-radius: 20px;
-            position: relative;
-            transform: rotate(1deg);
-            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
-            border: 4px dashed white;
-        }
-
-        .side-quest-card:hover {
-            transform: rotate(0deg) scale(1.03);
-        }
-
-        .side-quest-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            font-size: 1.3em;
-            font-weight: bold;
-            font-family: 'Permanent Marker', 'Gloria Hallelujah', cursive, sans-serif;
-        }
-
-        .side-quest-header::before {
-            content: "🎯";
-            font-size: 1.2em;
-            margin-right: 15px;
-        }
-
-        .side-quest-description {
-            font-size: 1.1em;
-            line-height: 1.6;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-        }
-
-        .polaroid-tape {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.9);
-            width: 60px;
-            height: 20px;
-            border-radius: 2px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            top: -10px;
-            right: 30px;
-            transform: rotate(25deg);
-        }
-
-        .polaroid-tape::before {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80%;
-            height: 2px;
-            background: rgba(0,0,0,0.1);
-        }
-
-        .tape {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.8);
-            width: 80px;
-            height: 30px;
-            border-radius: 3px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-
-        .tape1 {
-            top: -15px;
-            right: 20px;
-            transform: rotate(15deg);
-        }
-
-        .tape2 {
-            bottom: -15px;
-            left: 30px;
-            transform: rotate(-10deg);
-        }
-
         .journey-stats {
-            background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
-            color: white;
-            padding: 32px 4vw;
-            margin-top: 32px;
-            border-radius: 20px;
-            position: relative;
-            transform: rotate(-0.3deg);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-            border: 4px solid #4ecdc4;
-            overflow: hidden;
+          padding: 20px 2vw;
+          transform: rotate(0deg);
+          margin-top: 24px;
         }
-        
-        .stats-tape {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 3px;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.3);
-        }
-        
-        .stats-tape1 {
-            width: 100px;
-            height: 35px;
-            top: -17px;
-            left: 60px;
-            transform: rotate(-15deg);
-        }
-        
-        .stats-tape2 {
-            width: 80px;
-            height: 30px;
-            bottom: -15px;
-            right: 80px;
-            transform: rotate(20deg);
-        }
-        
-        .stats-header {
-            text-align: center;
-            margin-bottom: 32px;
-            position: relative;
-        }
-        
         .stats-header h2 {
-            font-size: 2.2em;
-            margin: 0;
-            text-shadow: 3px 3px 0px rgba(78, 205, 196, 0.8), 2px 2px 0 #ff6b6b;
-            font-family: 'Permanent Marker', 'Gloria Hallelujah', cursive, sans-serif;
-            letter-spacing: 1px;
-            color: white;
+          font-size: 1.8em;
         }
-        
-        .stats-emoji {
-            font-size: 2em;
-            display: inline-block;
-            animation: bounce 2s infinite;
-            margin: 0 15px;
-        }
-        
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
-        }
-
         .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin: 32px 0;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 20px;
+          margin: 24px 0;
         }
-
         .stat-item {
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-            position: relative;
-            transform: rotate(-1deg);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 3px solid #ff6b6b;
-            text-align: center;
+          padding: 20px;
         }
-        
-        .stat-item:nth-child(even) {
-            transform: rotate(1deg);
-            border-color: #4ecdc4;
-        }
-        
-        .stat-item:nth-child(3n) {
-            border-color: #ffb74d;
-        }
-        
-        .stat-item:hover {
-            transform: rotate(0deg) scale(1.05);
-            box-shadow: 0 12px 35px rgba(0,0,0,0.3);
-        }
-        
-        .stat-icon {
-            font-size: 2.5em;
-            margin-bottom: 12px;
-            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.1));
-        }
-
         .stat-number {
-            font-size: 2.8em;
-            font-weight: 900;
-            color: #2d2d2d;
-            font-family: 'Permanent Marker', 'Gloria Hallelujah', cursive, sans-serif;
-            text-shadow: 2px 2px 0px #4ecdc4, 1px 1px 2px rgba(78, 205, 196, 0.3);
-            margin-bottom: 8px;
-            line-height: 1;
+          font-size: 2.2em;
         }
-        
+        .stats-tape1,
+        .stats-tape2 {
+          display: none;
+        }
+      }
+      @media (max-width: 900px) {
+        .attraction-card {
+          flex-direction: column;
+          gap: 10px;
+        }
+      }
+
+      @media (min-width: 901px) {
+        .attraction-card {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .attraction-header {
+          margin-bottom: 0;
+          justify-content: flex-start;
+        }
+        .attraction-title {
+          font-size: 2em;
+          margin-bottom: 10px;
+          text-align: left;
+        }
+        .attraction-image {
+          margin-top: 0;
+          margin-bottom: 0;
+        }
+      }
+      @media (max-width: 600px) {
+        .header h1 {
+          font-size: 1.6em;
+          letter-spacing: 1px;
+        }
+        .header p {
+          font-size: 1em;
+        }
+        .header::before {
+          font-size: 35px;
+          top: 12px;
+          left: 15px;
+        }
+        .header::after {
+          font-size: 28px;
+          top: 15px;
+          right: 20px;
+        }
+        .scrapbook-sticker {
+          font-size: 1.8em;
+        }
+        .sticker-3,
+        .sticker-4 {
+          bottom: 8px;
+        }
+        .washi-tape {
+          height: 5px;
+        }
+        .city-name {
+          font-size: 2.1em;
+          width: 100vw;
+          margin: 0 0 10px 0;
+          text-align: center;
+          padding: 0 0 0 0;
+        }
+        .attraction-title {
+          font-size: 1.5em;
+        }
+        .side-quest-header {
+          font-size: 1em;
+        }
+        .attraction-image {
+          width: 50% !important;
+          max-width: 180px !important;
+          height: auto;
+          margin: 0 auto 12px auto !important;
+          display: block;
+        }
+        .food-section {
+          padding: 10px 2vw !important;
+        }
+        .food-grid {
+          display: flex !important;
+          flex-direction: column !important;
+          align-items: center !important;
+          justify-content: center !important;
+          gap: 15px !important;
+        }
+        /* mobile: square food thumbnails */
+        .food-grid img {
+          width: 150px !important;
+          height: 150px !important;
+          object-fit: cover !important;
+          margin: 0 auto !important;
+        }
+        /* Stats responsive styles */
+        .stats-header h2 {
+          font-size: 1.4em;
+        }
+        .stats-emoji {
+          font-size: 1.5em;
+          margin: 0 8px;
+        }
+        .stats-grid {
+          grid-template-columns: 1fr;
+          gap: 15px;
+        }
+        .stat-item {
+          padding: 18px;
+          transform: rotate(0deg) !important;
+        }
+        .stat-number {
+          font-size: 2em;
+        }
         .stat-label {
-            font-size: 1.2em;
-            font-weight: 700;
-            color: #333;
-            margin-bottom: 8px;
-            font-family: 'Caveat', 'Gloria Hallelujah', cursive, sans-serif;
+          font-size: 1.1em;
         }
-        
-        .stat-detail {
-            font-size: 0.9em;
-            color: #666;
-            line-height: 1.4;
-            font-style: italic;
-        }
-        
-        .stats-footer {
-            text-align: center;
-            margin-top: 32px;
-            padding-top: 24px;
-            border-top: 2px dashed #4ecdc4;
-        }
-        
         .stats-quote {
-            font-size: 1.4em;
-            font-family: 'Caveat', 'Gloria Hallelujah', cursive, sans-serif;
-            font-weight: 700;
-            color: #4ecdc4;
-            margin-bottom: 12px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+          font-size: 1.2em;
         }
-        
-        .stats-subtext {
-            font-size: 1em;
-            opacity: 0.9;
-            color: #fff;
+      }
+      /* desktop: match attraction images and enlarge food titles */
+      @media (min-width: 601px) {
+        .food-grid img {
+          width: 320px !important;
+          height: auto !important;
+          aspect-ratio: 4/3 !important;
+          object-fit: cover !important;
         }
+        .food-section h3 {
+          font-size: 1.5em !important;
+        }
+      }
+      @media (max-width: 400px) {
+        .header h1 {
+          font-size: 1em;
+        }
+      }
+      @media (max-width: 350px) {
+        .header h1 {
+          font-size: 0.8em;
+        }
+      }
+      /* Fun scrapbook font from Google Fonts */
 
-        @media (max-width: 900px) {
-            .scrapbook {
-                border-radius: 0;
-                max-width: 100vw;
-                width: 100vw;
-            }
-            .header {
-                padding: 25px 2vw 35px 2vw;
-            }
-            .header h1 {
-                font-size: 2.2em;
-            }
-            .header p {
-                font-size: 1.1em;
-            }
-            .header::before {
-                font-size: 45px;
-                top: 15px;
-                left: 25px;
-            }
-            .header::after {
-                font-size: 35px;
-                top: 20px;
-                right: 30px;
-            }
-            .scrapbook-sticker {
-                font-size: 2em;
-            }
-            .sticker-1, .sticker-2 {
-                top: 80%;
-            }
-            .washi-tape {
-                height: 6px;
-            }
-            .journey-container {
-                padding: 12px 2vw;
-            }
-            .city-stop {
-                padding: 12px 2vw;
-            }
-            .journey-stats {
-                padding: 20px 2vw;
-                transform: rotate(0deg);
-                margin-top: 24px;
-            }
-            .stats-header h2 {
-                font-size: 1.8em;
-            }
-            .stats-grid {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-                gap: 20px;
-                margin: 24px 0;
-            }
-            .stat-item {
-                padding: 20px;
-            }
-            .stat-number {
-                font-size: 2.2em;
-            }
-            .stats-tape1, .stats-tape2 {
-                display: none;
-            }
-        }
-        @media (max-width: 900px) {
-            .attraction-card {
-                flex-direction: column;
-                gap: 10px;
-            }
-        }
-
-        @media (min-width: 901px) {
-            .attraction-card {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .attraction-header {
-                margin-bottom: 0;
-                justify-content: flex-start;
-            }
-            .attraction-title {
-                font-size: 2em;
-                margin-bottom: 10px;
-                text-align: left;
-            }
-            .attraction-image {
-                margin-top: 0;
-                margin-bottom: 0;
-            }
-        }
-        @media (max-width: 600px) {
-            .header h1 {
-                font-size: 1.6em;
-                letter-spacing: 1px;
-            }
-            .header p {
-                font-size: 1em;
-            }
-            .header::before {
-                font-size: 35px;
-                top: 12px;
-                left: 15px;
-            }
-            .header::after {
-                font-size: 28px;
-                top: 15px;
-                right: 20px;
-            }
-            .scrapbook-sticker {
-                font-size: 1.8em;
-            }
-            .sticker-3, .sticker-4 {
-                bottom: 8px;
-            }
-            .washi-tape {
-                height: 5px;
-            }
-            .city-name {
-                font-size: 2.1em;
-                width: 100vw;
-                margin: 0 0 10px 0;
-                text-align: center;
-                padding: 0 0 0 0;
-            }
-            .attraction-title {
-                font-size: 1.5em;
-            }
-            .side-quest-header {
-                font-size: 1em;
-            }
-            .attraction-image {
-                width: 50% !important;
-                max-width: 180px !important;
-                height: auto;
-                margin: 0 auto 12px auto !important;
-                display: block;
-            }
-            .food-section {
-                padding: 10px 2vw !important;
-            }
-            .food-grid {
-                display: flex !important;
-                flex-direction: column !important;
-                align-items: center !important;
-                justify-content: center !important;
-                gap: 15px !important;
-            }
-            /* mobile: square food thumbnails */
-            .food-grid img {
-                width: 150px !important;
-                height: 150px !important;
-                object-fit: cover !important;
-                margin: 0 auto !important;
-            }
-            /* Stats responsive styles */
-            .stats-header h2 {
-                font-size: 1.4em;
-            }
-            .stats-emoji {
-                font-size: 1.5em;
-                margin: 0 8px;
-            }
-            .stats-grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-            .stat-item {
-                padding: 18px;
-                transform: rotate(0deg) !important;
-            }
-            .stat-number {
-                font-size: 2em;
-            }
-            .stat-label {
-                font-size: 1.1em;
-            }
-            .stats-quote {
-                font-size: 1.2em;
-            }
-        }
-        /* desktop: match attraction images and enlarge food titles */
-        @media (min-width: 601px) {
-            .food-grid img {
-                width: 320px !important;
-                height: auto !important;
-                aspect-ratio: 4/3 !important;
-                object-fit: cover !important;
-            }
-            .food-section h3 {
-                font-size: 1.5em !important;
-            }
-        }
-        @media (max-width: 400px) {
-            .header h1 {
-                font-size: 1em;
-            }
-        }
-        @media (max-width: 350px) {
-            .header h1 {
-                font-size: 0.8em;
-            }
-        }
-        /* Fun scrapbook font from Google Fonts */
-
-    /* Make food images square and fixed size */
-    .food-grid img {
+      /* Make food images square and fixed size */
+      .food-grid img {
         width: 150px !important;
         height: 150px !important;
         object-fit: cover !important;
         margin: 0 auto !important;
-    }
+      }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Patrick+Hand&family=Caveat:wght@700&display=swap" rel="stylesheet">
-</head>
-<body>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Permanent+Marker&amp;family=Patrick+Hand&amp;family=Caveat:wght@700&amp;display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
     <div class="scrapbook">
-        <div class="header">
-            <!-- Decorative washi tape strips -->
-            <div class="washi-tape washi-tape-1"></div>
-            <div class="washi-tape washi-tape-2"></div>
-            
-            <!-- Scrapbook stickers -->
-            <div class="scrapbook-sticker sticker-1">🗺️</div>
-            <div class="scrapbook-sticker sticker-2">🎒</div>
-            <div class="scrapbook-sticker sticker-3">📸</div>
-            <div class="scrapbook-sticker sticker-4">🎫</div>
-
-            <h1>European Train Adventure</h1>
-            <p>🎒 From Italian Glamour to Imperial Grandeur 🎒</p>
+      <div class="header">
+        <!-- Decorative washi tape strips -->
+        <div class="washi-tape washi-tape-1"></div>
+        <div class="washi-tape washi-tape-2"></div>
+        <!-- Scrapbook stickers -->
+        <div class="scrapbook-sticker sticker-1">🗺️</div>
+        <div class="scrapbook-sticker sticker-2">🎒</div>
+        <div class="scrapbook-sticker sticker-3">📸</div>
+        <div class="scrapbook-sticker sticker-4">🎫</div>
+        <h1>European Train Adventure</h1>
+        <p>🎒 From Italian Glamour to Imperial Grandeur 🎒</p>
+      </div>
+      <div class="journey-container">
+        <div
+          id="image-zoom-help"
+          style="
+            background: #fffbe7;
+            color: #856404;
+            border-left: 5px solid #ffc107;
+            padding: 12px 20px 12px 20px;
+            border-radius: 0 0 12px 12px;
+            font-size: 1.1em;
+            margin-bottom: 38px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            max-width: 520px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+          "
+        >
+          FYI, you can tap an image to zoom in!
         </div>
-
-        <div class="journey-container">
-        <div id="image-zoom-help" style="background: #fffbe7; color: #856404; border-left: 5px solid #ffc107; padding: 12px 20px 12px 20px; border-radius: 0 0 12px 12px; font-size: 1.1em; margin-bottom: 38px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); max-width: 520px; margin-left: auto; margin-right: auto; text-align: center;">
-            FYI, you can tap an image to zoom in!
+        <div class="train-line">
+          <span class="train-emoji">🚂</span> Start: Milan
         </div>
-                    <div class="train-line">
-                <span class="train-emoji">🚂</span> Start: Milan
+        <div class="city-stop">
+          <div class="tape tape1"></div>
+          <div class="city-header">
+            <h2 class="city-name">🇮🇹 Milan</h2>
+          </div>
+          <div
+            class="city-description"
+            style="
+              background: #f8f9fa;
+              padding: 20px;
+              border-radius: 12px;
+              margin-bottom: 25px;
+              border-left: 4px solid #4ecdc4;
+              font-size: 1.1em;
+              line-height: 1.6;
+              color: #444;
+            "
+          >
+            Italy's fashion and design capital, Milan seamlessly blends medieval
+            history with cutting-edge modernity. This cosmopolitan powerhouse is
+            home to world-class art, iconic architecture, and some of the
+            planet's most sophisticated shopping and dining. From Gothic spires
+            to glamorous aperitivo culture, Milan embodies Italian elegance at
+            its finest.
+          </div>
+          <div class="attractions-container">
+            <div class="attraction-card">
+              <div class="polaroid-tape"></div>
+              <div class="attraction-header">
+                <span class="attraction-icon">🏰</span>
+                <h3 class="attraction-title">
+                  Duomo di Milano &amp; Rooftop Access
+                </h3>
+              </div>
+              <img
+                alt="Milan Cathedral"
+                class="attraction-image"
+                src="img/Milan_Cathedral.jpg"
+              />
+              <p class="attraction-description">
+                The crown jewel of Milan! This Gothic masterpiece took nearly
+                six centuries to complete, and every spire tells a story. Don't
+                just admire it from ground level – take the elevator (or brave
+                the stairs) to the rooftop terraces. Walking among the flying
+                buttresses and intricate spires with panoramic views of the Alps
+                on clear days is absolutely magical. Pro tip: Golden hour visits
+                are chef's kiss! 💫
+              </p>
             </div>
-            <div class="city-stop">
-
-                <div class="tape tape1"></div>
-                <div class="city-header">
-                    <h2 class="city-name">🇮🇹 Milan</h2>
-                </div>
-                <div class="city-description" style="background: #f8f9fa; padding: 20px; border-radius: 12px; margin-bottom: 25px; border-left: 4px solid #4ecdc4; font-size: 1.1em; line-height: 1.6; color: #444;">
-                    Italy's fashion and design capital, Milan seamlessly blends medieval history with cutting-edge modernity. This cosmopolitan powerhouse is home to world-class art, iconic architecture, and some of the planet's most sophisticated shopping and dining. From Gothic spires to glamorous aperitivo culture, Milan embodies Italian elegance at its finest.
-                </div>
-                <div class="attractions-container">
-                    <div class="attraction-card">
-                        <div class="polaroid-tape"></div>
-                        <div class="attraction-header">
-                            <span class="attraction-icon">🏰</span>
-                            <h3 class="attraction-title">Duomo di Milano & Rooftop Access</h3>
-                        </div>
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Milan_Cathedral_from_Piazza_del_Duomo.jpg/1920px-Milan_Cathedral_from_Piazza_del_Duomo.jpg" alt="Milan Cathedral" class="attraction-image">
-                        <p class="attraction-description">
-                            The crown jewel of Milan! This Gothic masterpiece took nearly six centuries to complete, and every spire tells a story. Don't just admire it from ground level – take the elevator (or brave the stairs) to the rooftop terraces. Walking among the flying buttresses and intricate spires with panoramic views of the Alps on clear days is absolutely magical. Pro tip: Golden hour visits are chef's kiss! 💫
-                        </p>
-                    </div>
-
-                    <div class="attraction-card">
-                        <div class="polaroid-tape"></div>
-                        <div class="attraction-header">
-                            <span class="attraction-icon">🎭</span>
-                            <h3 class="attraction-title">La Scala Opera House</h3>
-                        </div>
-                        <img src="https://media.tacdn.com/media/attractions-splice-spp-674x446/0a/a9/c8/35.jpg" alt="La Scala Opera House" class="attraction-image">
-                        <p class="attraction-description">
-                            Even if opera isn't your thing, La Scala is pure theater magic! This legendary venue has hosted the world's greatest performers since 1778. The museum showcases stunning costumes, instruments, and memorabilia. If you can snag tickets to a performance, prepare for goosebumps – the acoustics are otherworldly. The red velvet and gold details make you feel like royalty! ✨
-                        </p>
-                    </div>
-
-                    <div class="attraction-card">
-                        <div class="polaroid-tape"></div>
-                        <div class="attraction-header">
-                            <span class="attraction-icon">🍷</span>
-                            <h3 class="attraction-title">Navigli District Aperitivo</h3>
-                        </div>
-                        <img src="https://www.citalia.com/-/media/Bynder/Citalia-destinations/Italy/Cities/Milan/Milan-2022-Grand-Canal-Shutterstock-201883006-Hybris.jpg" alt="Navigli District" class="attraction-image">
-                        <p class="attraction-description">
-                            Welcome to Milan's coolest neighborhood! These historic canals (partly designed by Leonardo da Vinci!) come alive at sunset. The aperitivo culture here is legendary – order a Negroni Sbagliato and get a whole spread of complimentary snacks. Canal-side dining, vintage shops, and the most beautiful golden hour reflections make this the perfect spot to embrace la dolce vita! 🥂
-                        </p>
-                    </div>
-
-                    <div class="side-quest-card">
-                        <div class="side-quest-header">Secret Side Quest</div>
-                        <p class="side-quest-description">
-                            Hunt for vintage fashion in Brera district's hidden boutiques! This artsy neighborhood is packed with independent designers, antique shops, and Instagram-worthy street art. Perfect for finding unique pieces that scream "I have impeccable taste" and discovering those secret corners that make Milan magical. Plus, the cobblestone streets and ivy-covered buildings are pure aesthetic gold! 📸✨
-                        </p>
-                    </div>
-                </div>
-                <div class="food-section" style="margin-top: 25px; background: #fff3cd; padding: 20px; border-radius: 10px; border-left: 5px solid #ffc107;">
-                    <h3 style="color: #856404; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;"><span>🍽️</span>Local Flavors</h3>
-                    <div class="food-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
-                        <div style="text-align: center;">
-                            <img src="https://blog.vorrei.co.uk/wp-content/uploads/2021/05/SD_RisottoMilanese.jpeg" alt="Risotto alla Milanese" style="width: 100%; height: 100px; object-fit: cover; border-radius: 8px; margin-bottom: 8px;">
-                            <p style="font-size: 0.9em; margin: 0;"><strong>Risotto alla Milanese</strong><br>Creamy saffron rice, Milan's golden signature dish.</p>
-                        </div>
-                        <div style="text-align: center;">
-                            <img src="https://cdn.apartmenttherapy.info/image/upload/f_jpg,q_auto:eco,c_fill,g_auto,w_1500,ar_1:1/k%2FPhoto%2FRecipe%20Ramp%20Up%2F2021-10-Panettone%2F01_IMG_3541_2" alt="Panettone" style="width: 100%; height: 100px; object-fit: cover; border-radius: 8px; margin-bottom: 8px;">
-                            <p style="font-size: 0.9em; margin: 0;"><strong>Panettone</strong><br>Sweet bread studded with candied fruits, perfect with coffee.</p>
-                        </div>
-                        <div style="text-align: center;">
-                            <img src="https://muybuenoblog.com/wp-content/uploads/2024/02/classic-aperol-spritz-recipe.jpeg" alt="Aperol Spritz" style="width: 100%; height: 100px; object-fit: cover; border-radius: 8px; margin-bottom: 8px;">
-                            <p style="font-size: 0.9em; margin: 0;"><strong>Aperol Spritz</strong><br>The iconic orange aperitif that defines Milanese happy hour.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="tape tape2"></div>
+            <div class="attraction-card">
+              <div class="polaroid-tape"></div>
+              <div class="attraction-header">
+                <span class="attraction-icon">🎭</span>
+                <h3 class="attraction-title">La Scala Opera House</h3>
+              </div>
+              <img
+                alt="La Scala Opera House"
+                class="attraction-image"
+                src="img/La_Scala_Opera_House.jpg"
+              />
+              <p class="attraction-description">
+                Even if opera isn't your thing, La Scala is pure theater magic!
+                This legendary venue has hosted the world's greatest performers
+                since 1778. The museum showcases stunning costumes, instruments,
+                and memorabilia. If you can snag tickets to a performance,
+                prepare for goosebumps – the acoustics are otherworldly. The red
+                velvet and gold details make you feel like royalty! ✨
+              </p>
             </div>
-
-                        <div class="train-line">
-                <span class="train-emoji">🚂</span> 1.5h Journey: Milan → Verona
+            <div class="attraction-card">
+              <div class="polaroid-tape"></div>
+              <div class="attraction-header">
+                <span class="attraction-icon">🍷</span>
+                <h3 class="attraction-title">Navigli District Aperitivo</h3>
+              </div>
+              <img
+                alt="Navigli District"
+                class="attraction-image"
+                src="img/Navigli_District.jpg"
+              />
+              <p class="attraction-description">
+                Welcome to Milan's coolest neighborhood! These historic canals
+                (partly designed by Leonardo da Vinci!) come alive at sunset.
+                The aperitivo culture here is legendary – order a Negroni
+                Sbagliato and get a whole spread of complimentary snacks.
+                Canal-side dining, vintage shops, and the most beautiful golden
+                hour reflections make this the perfect spot to embrace la dolce
+                vita! 🥂
+              </p>
             </div>
-            <div class="city-stop">
-            <!-- Journey 1 -->
-
-                <div class="tape tape1"></div>
-                <div class="city-header">
-                    <h2 class="city-name">🇮🇹 Verona</h2>
-                </div>
-                <div class="city-description" style="background: #f8f9fa; padding: 20px; border-radius: 12px; margin-bottom: 25px; border-left: 4px solid #ff6b6b; font-size: 1.1em; line-height: 1.6; color: #444;">
-                    Shakespeare's romantic stage come to life, Verona is a perfectly preserved medieval city where Roman history meets Renaissance beauty. This UNESCO World Heritage site enchants visitors with its ancient Roman arena, charming piazzas, and of course, the legendary balcony of Juliet. Every cobblestone street tells a story of love, drama, and timeless Italian charm.
-                </div>
-                <div class="attractions-container">
-                    <div class="attraction-card">
-                        <div class="polaroid-tape"></div>
-                        <div class="attraction-header">
-                            <span class="attraction-icon">💕</span>
-                            <h3 class="attraction-title">Juliet's House & Balcony</h3>
-                        </div>
-                        <img src="https://hips.hearstapps.com/hmg-prod/images/juliet-s-house-001-1579602090.jpg" alt="Juliet's House" class="attraction-image">
-                        <p class="attraction-description">
-                            Yes, it's touristy, but it's also ridiculously romantic! This 13th-century house (maybe) belonged to the Capulets, and the famous balcony scene comes alive here. The courtyard walls are covered in love letters and graffiti from hopeless romantics worldwide. Touch Juliet's bronze statue for good luck in love, then strike a pose on the balcony for the ultimate Romeo and Juliet moment! 💌
-                        </p>
-                    </div>
-
-                    <div class="attraction-card">
-                        <div class="polaroid-tape"></div>
-                        <div class="attraction-header">
-                            <span class="attraction-icon">🏛️</span>
-                            <h3 class="attraction-title">Arena di Verona</h3>
-                        </div>
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/54/Italy_-_Verona_-_Arena.jpg" alt="Arena di Verona" class="attraction-image">
-                        <p class="attraction-description">
-                            This Roman amphitheater is older than the Colosseum and in incredible condition! Built in 30 AD, it still hosts world-class opera performances under the stars. Even without a show, walking through this ancient venue gives you chills. Imagine gladiators fighting here 2,000 years ago! The acoustics are so perfect you can hear a whisper from across the arena. Absolutely mind-blowing! 🏺
-                        </p>
-                    </div>
-
-                    <div class="attraction-card">
-                        <div class="polaroid-tape"></div>
-                        <div class="attraction-header">
-                            <span class="attraction-icon">🏛️</span>
-                            <h3 class="attraction-title">Torre dei Lamberti</h3>
-                        </div>
-                        <img src="https://www.italyreview.com/uploads/2/6/3/6/26365745/torre-dei-lamberti-verona-1_orig.jpg" alt="Torre dei Lamberti" class="attraction-image">
-                        <p class="attraction-description">
-                            Verona's tallest medieval tower at 84 meters high! This striking brick tower has been watching over the city since the 12th century. Climb to the top (or take the elevator if you prefer) for absolutely breathtaking panoramic views of Verona's red-tiled rooftops, the Arena, and the surrounding hills. The golden hour views are particularly magical, making it the perfect spot for epic Instagram shots that'll make your followers weep with envy! �📸
-                        </p>
-                    </div>
-
-                    <div class="side-quest-card">
-                        <div class="side-quest-header">Adventure Side Quest</div>
-                        <p class="side-quest-description">
-                            Hunt for the coolest street art and hidden courtyards in Verona's medieval maze! This ancient city is packed with secret passages, hidden doorways, and unexpected murals tucked between the tourist spots. Challenge each other to find the most epic photo spots - medieval arches, colorful shutters, vintage Vespa sightings, and street art that locals have created. It's like a real-life treasure hunt through 2,000 years of history, perfect for some seriously cool Instagram content! 🏛️📸
-                        </p>
-                    </div>
-                </div>
-
-
-                <div class="food-section" style="margin-top: 25px; background: #fff3cd; padding: 20px; border-radius: 10px; border-left: 5px solid #ffc107;">
-                    <h3 style="color: #856404; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;"><span>🍽️</span>Local Flavors</h3>
-                    <div class="food-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
-                        <div style="text-align: center;">
-                            <img src="https://media.lacucinaitaliana.com/photos/5fa6ac8720012161ee98a3a9/master/w_900,c_limit/Risotto%20all'Amarone%20Risotteria%20Melotti%20Roma.jpg" alt="Risotto all'Amarone" style="width: 100%; height: 100px; object-fit: cover; border-radius: 8px; margin-bottom: 8px;">
-                            <p style="font-size: 0.9em; margin: 0;"><strong>Risotto all'Amarone</strong> 🌱<br>Vegetarian! Creamy risotto with local Amarone wine - absolutely divine.</p>
-                        </div>
-                        <div style="text-align: center;">
-                            <img src="https://i.ytimg.com/vi/taqVYujlF8k/maxresdefault.jpg" alt="Gnocchi di Malga" style="width: 100%; height: 100px; object-fit: cover; border-radius: 8px; margin-bottom: 8px;">
-                            <p style="font-size: 0.9em; margin: 0;"><strong>Gnocchi di Malga</strong><br>Fluffy potato dumplings with mountain cheese and butter.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="tape tape2"></div>
+            <div class="side-quest-card">
+              <div class="side-quest-header">Secret Side Quest</div>
+              <p class="side-quest-description">
+                Hunt for vintage fashion in Brera district's hidden boutiques!
+                This artsy neighborhood is packed with independent designers,
+                antique shops, and Instagram-worthy street art. Perfect for
+                finding unique pieces that scream "I have impeccable taste" and
+                discovering those secret corners that make Milan magical. Plus,
+                the cobblestone streets and ivy-covered buildings are pure
+                aesthetic gold! 📸✨
+              </p>
             </div>
-
-                        <div class="train-line">
-                <span class="train-emoji">🚂</span> 2h Journey: Verona → Trento
+          </div>
+          <div
+            class="food-section"
+            style="
+              margin-top: 25px;
+              background: #fff3cd;
+              padding: 20px;
+              border-radius: 10px;
+              border-left: 5px solid #ffc107;
+            "
+          >
+            <h3
+              style="
+                color: #856404;
+                margin-bottom: 15px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+              "
+            >
+              <span>🍽️</span>Local Flavors
+            </h3>
+            <div
+              class="food-grid"
+              style="
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 15px;
+              "
+            >
+              <div style="text-align: center">
+                <img
+                  alt="Risotto alla Milanese"
+                  src="img/Risotto_alla_Milanese.jpeg"
+                  style="
+                    width: 100%;
+                    height: 100px;
+                    object-fit: cover;
+                    border-radius: 8px;
+                    margin-bottom: 8px;
+                  "
+                />
+                <p style="font-size: 0.9em; margin: 0">
+                  <strong>Risotto alla Milanese</strong><br />Creamy saffron
+                  rice, Milan's golden signature dish.
+                </p>
+              </div>
+              <div style="text-align: center">
+                <img
+                  alt="Panettone"
+                  src="img/Panettone_1.jpeg"
+                  style="
+                    width: 100%;
+                    height: 100px;
+                    object-fit: cover;
+                    border-radius: 8px;
+                    margin-bottom: 8px;
+                  "
+                />
+                <p style="font-size: 0.9em; margin: 0">
+                  <strong>Panettone</strong><br />Sweet bread studded with
+                  candied fruits, perfect with coffee.
+                </p>
+              </div>
+              <div style="text-align: center">
+                <img
+                  alt="Aperol Spritz"
+                  src="img/Aperol_Spritz.jpeg"
+                  style="
+                    width: 100%;
+                    height: 100px;
+                    object-fit: cover;
+                    border-radius: 8px;
+                    margin-bottom: 8px;
+                  "
+                />
+                <p style="font-size: 0.9em; margin: 0">
+                  <strong>Aperol Spritz</strong><br />The iconic orange aperitif
+                  that defines Milanese happy hour.
+                </p>
+              </div>
             </div>
-            <div class="city-stop">
-            <!-- Journey 2 -->
-
-                <div class="tape tape1"></div>
-                <div class="city-header">
-                    <h2 class="city-name">🇮🇹 Trento</h2>
-                    <span style="background: #ff6b6b; color: white; padding: 5px 10px; border-radius: 15px; font-size: 0.8em;">Day Trip</span>
-                </div>
-                <div class="city-description" style="background: #f8f9fa; padding: 20px; border-radius: 12px; margin-bottom: 25px; border-left: 4px solid #ffb74d; font-size: 1.1em; line-height: 1.6; color: #444;">
-                    Nestled in the heart of the Dolomites, Trento is where Italian warmth meets Alpine grandeur. This historic city was once the seat of the famous Council of Trent that shaped Catholic history, and today it's a perfect gateway to mountain adventures. With its Renaissance frescoes, medieval castles, and breathtaking cable car rides to mountain peaks, Trento offers an unforgettable taste of Italy's mountainous north.
-                </div>
-                <div class="attractions-container">
-                    
-                    <div class="attraction-card">
-                        <div class="polaroid-tape"></div>
-                        <div class="attraction-header">
-                            <span class="attraction-icon">⛪</span>
-                            <h3 class="attraction-title">Duomo di Trento</h3>
-                        </div>
-                        <img src="https://www.progettostoriadellarte.it/wp-content/uploads/2020/05/Fig.-3-2-scaled.jpg" alt="Duomo di Trento" class="attraction-image">
-                        <p class="attraction-description">
-                            This Romanesque cathedral is where the famous Council of Trent met to shape Catholic history! The stunning frescoes inside tell epic biblical stories in vivid colors, and the rose window creates the most magical light patterns. The crypt beneath holds ancient treasures, and the bell tower offers panoramic views of the Alps. It's like a spiritual and artistic masterpiece rolled into one incredible experience! ⛪✨
-                        </p>
-                    </div>
-
-                        <div class="attraction-card">
-                            <div class="polaroid-tape"></div>
-                            <div class="attraction-header">
-                                <span class="attraction-icon">🏰</span>
-                                <h3 class="attraction-title">Buonconsiglio Castle & Alpine Views</h3>
-                            </div>
-                            <div style="display: flex; flex-wrap: wrap; gap: 18px; align-items: flex-start;">
-                                <img src="https://www.cultura.trentino.it/var/001/storage/images/media/images/castello-del-buonconsiglio/16382371-1-ita-IT/Castello-del-Buonconsiglio_imagefullwide.jpg" alt="Buonconsiglio Castle" class="attraction-image" style="max-width: 320px;">
-                                <img src="https://shegowandering.com/wp-content/uploads/2020/08/DSC00833-1-1536x1024.jpg" alt="View from inside Buonconsiglio Castle looking at mountains" class="attraction-image" style="max-width: 320px;">
-                            </div>
-                            <p class="attraction-description">
-                                This fortress is like stepping into a Renaissance fairy tale! The castle complex spans centuries of history, from medieval towers to elegant Renaissance frescoes. The famous "Cycle of the Months" frescoes are absolutely breathtaking – medieval Instagram before Instagram existed!<br><br>
-                                The breathtaking mountain views from inside Buonconsiglio Castle are absolutely spectacular! From the castle windows and terraces, you can gaze out at the stunning Alpine panorama that surrounds Trento. The dramatic peaks of the Dolomites create a majestic backdrop that changes color throughout the day. These views perfectly capture why this fortress was chosen as a strategic location – it's like having a front-row seat to nature's grandest theater! 🏔️✨
-                            </p>
-                        </div>
-
-                    <div class="attraction-card">
-                        <div class="polaroid-tape"></div>
-                        <div class="attraction-header">
-                            <span class="attraction-icon">🚡</span>
-                            <h3 class="attraction-title">Cable Car to Sardagna</h3>
-                        </div>
-                        <img src="https://elevatorworld.com/wp-content/uploads/2024/08/A-Cable-Car-at-the-Foot-of-the-Dolomite-Alps.jpg" alt="Cable Car at the Foot of the Dolomite Alps" class="attraction-image">
-                        <p class="attraction-description">
-                            Take the cable car up to Sardagna for jaw-dropping Alpine panoramas! This thrilling ride lifts you high above Trento, offering spectacular mountain vistas and a bird's-eye view of the city below. Whether you're just enjoying the scenery or feeling adventurous enough to try paragliding, the sunset views over the Dolomites will leave you speechless. It's pure adrenaline and Instagram gold! 🪂🏔️
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="food-section" style="margin-top: 25px; background: #fff3cd; padding: 20px; border-radius: 10px; border-left: 5px solid #ffc107;">
-                    <h3 style="color: #856404; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;"><span>🍽️</span>Local Flavors</h3>
-                    <div class="food-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
-                        <div style="text-align: center;">
-                            <img src="https://bigoven-res.cloudinary.com/image/upload/t_recipe-1280/apple-strudel-14c498.jpg" alt="Apple Strudel" style="width: 100%; height: 100px; object-fit: cover; border-radius: 8px; margin-bottom: 8px;">
-                            <p style="font-size: 0.9em; margin: 0;"><strong>Apple Strudel</strong><br>Flaky pastry filled with spiced apples, a South Tyrolean classic.</p>
-                        </div>
-                        <div style="text-align: center;">
-                            <img src="https://www.zingermansdeli.com/app/uploads/2019/10/speck-alto-adige-1_web.jpg" alt="Speck Alto Adige" style="width: 100%; height: 100px; object-fit: cover; border-radius: 8px; margin-bottom: 8px;">
-                            <p style="font-size: 0.9em; margin: 0;"><strong>Speck Alto Adige</strong><br>Smoky cured ham from the mountains, perfect with local bread.</p>
-                        </div>
-                        <div style="text-align: center;">
-                            <img src="https://s3.amazonaws.com/images.vinous.com/uploads%2F1604343242675-TAA.png" alt="Local Wines" style="width: 100%; height: 100px; object-fit: cover; border-radius: 8px; margin-bottom: 8px;">
-                            <p style="font-size: 0.9em; margin: 0;"><strong>Local Wines</strong><br>Crisp whites and elegant reds from Trentino's mountain vineyards.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="tape tape2"></div>
-            </div>
-
-                        <div class="train-line">
-                <span class="train-emoji">🚂</span> 3h Journey: Trento → Innsbruck
-            </div>
-            <div class="city-stop">
-            <!-- Journey 3 -->
-
-                <div class="tape tape1"></div>
-                <div class="city-header">
-                    <h2 class="city-name">🇦🇹 Innsbruck</h2>
-                </div>
-                <div class="city-description" style="background: #f8f9fa; padding: 20px; border-radius: 12px; margin-bottom: 25px; border-left: 4px solid #4ecdc4; font-size: 1.1em; line-height: 1.6; color: #444;">
-                    The crown jewel of the Austrian Alps, Innsbruck is where imperial history meets mountain majesty in the most spectacular setting imaginable. This former imperial residence offers a unique blend of baroque architecture, world-class skiing culture, and cutting-edge Alpine design. With cable cars whisking you from medieval old town to snow-capped peaks in minutes, Innsbruck is pure Alpine magic.
-                </div>
-                <div class="attractions-container">
-                    <div class="attraction-card">
-                        <div class="polaroid-tape"></div>
-                        <div class="attraction-header">
-                            <span class="attraction-icon">🏛️</span>
-                            <h3 class="attraction-title">Goldenes Dachl (Golden Roof)</h3>
-                        </div>
-                        <div style="display: flex; flex-wrap: wrap; gap: 18px; align-items: flex-start;">
-                            <img src="https://images.squarespace-cdn.com/content/61e9b1539516cb18da85d455/1664904779168-KZMNK0A36Y6RMGVFSRSI/301600577_436613781829272_1050235792105665662_n.jpg?format=1500w&content-type=image%2Fjpeg" alt="Goldenes Dachl" class="attraction-image">
-                            <img src="https://storage.conocien.do/imagenes/destinos/europa/austria/innsbruck/que-visitamos/que-visitamos.jpg" alt="A close up view of the roof" class="attraction-image">
-                        </div>
-                        <p class="attraction-description">
-                            This iconic golden roof is Innsbruck's crown jewel! Built by Emperor Maximilian I in 1500, the balcony is covered with 2,657 fire-gilded copper tiles that gleam like pure gold in the sunlight. It was designed as a royal box seat for watching tournaments in the square below. Today, it's the perfect backdrop for your "I'm living my best Alpine life" photos. The surrounding Gothic architecture makes it even more magical! ✨👑
-                        </p>
-                    </div>
-
-                    <div class="attraction-card">
-                        <div class="polaroid-tape"></div>
-                        <div class="attraction-header">
-                            <span class="attraction-icon">🚠</span>
-                            <h3 class="attraction-title">Nordkette Cable Car Alpine Views</h3>
-                        </div>
-                        <img src="https://www.innsbruck.info/uploads/tx_webxbookingemo/ImageStorage/Sommer_63338c9de3c1a4c96556af4e6397f95a.jpg" alt="Nordkette Cable Car" class="attraction-image">
-                        <p class="attraction-description">
-                            From city center to 2,000 meters in just 20 minutes – this cable car journey is pure Alpine magic! The ultra-modern Zaha Hadid-designed stations look like spaceships, and the views get more spectacular with each stop. At the top, you're literally standing on a mountain peak with 360-degree panoramas of snow-capped peaks and the Inn Valley below. It's like being on top of the world! 🏔️🚠
-                        </p>
-                    </div>
-
-                    <div class="attraction-card">
-                        <div class="polaroid-tape"></div>
-                        <div class="attraction-header">
-                            <span class="attraction-icon">🎨</span>
-                            <h3 class="attraction-title">Nordkette cable car</h3>
-                        </div>
-                        <div style="display: flex; flex-wrap: wrap; gap: 18px; align-items: flex-start;">
-                            <img src="https://www.innsbruck.info/uploads/tx_webxbookingemo/ImageStorage/Sommer_63338c9de3c1a4c96556af4e6397f95a.jpg" alt="Cable Car" class="attraction-image">
-                            <img src="https://storage.conocien.do/imagenes/destinos/europa/austria/innsbruck/que-visitamos/que-visitamos.jpg" alt="View from the observation platform" class="attraction-image">
-                        </div>
-                        <p class="attraction-description">
-                            The Nordkette cable car whisks you straight from Innsbruck's charming old town up into the dramatic Alpine peaks - what a magical journey from cobblestones to clouds in just minutes! Standing at the top station, the whole Inn Valley spreads out below like a perfect postcard, with those jagged Tyrolean mountains stretching endlessly into the distance.
-                        </p>
-                    </div>
-
-                    <div class="side-quest-card">
-                        <div class="side-quest-header">Sparkly Side Quest</div>
-                        <p class="side-quest-description">
-                            Visit the quirky Swarovski Crystal Worlds – it's wonderfully bizarre and sparkly! This underground wonderland of art installations made entirely from crystals is like stepping into a kaleidoscope dream. Giant crystal-covered chambers, rainbow light shows, and mind-bending artistic creations that'll blow your mind. It's weird, it's wonderful, and it's perfect for some seriously unique photos that'll have everyone asking "Where on earth is that?!" ✨💎
-                        </p>
-                    </div>
-                </div>
-                <div class="food-section" style="margin-top: 25px; background: #fff3cd; padding: 20px; border-radius: 10px; border-left: 5px solid #ffc107;">
-                    <h3 style="color: #856404; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;"><span>🍽️</span>Local Flavors</h3>
-                    <div class="food-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
-                        <div style="text-align: center;">
-                            <img src="https://i.pinimg.com/originals/94/5f/6e/945f6e4cc237010932504ca148583fd2.jpg" alt="Schnitzel" style="width: 100%; height: 100px; object-fit: cover; border-radius: 8px; margin-bottom: 8px;">
-                            <p style="font-size: 0.9em; margin: 0;"><strong>Wiener Schnitzel</strong><br>Golden breaded cutlet, Austria's most famous dish.</p>
-                        </div>
-                        <div style="text-align: center;">
-                            <img src="https://bigoven-res.cloudinary.com/image/upload/t_recipe-1280/apple-strudel-14c498.jpg" alt="Apple Strudel" style="width: 100%; height: 100px; object-fit: cover; border-radius: 8px; margin-bottom: 8px;">
-                            <p style="font-size: 0.9em; margin: 0;"><strong>Apple Strudel</strong><br>Paper-thin pastry with cinnamon apples and vanilla sauce.</p>
-                        </div>
-                        <div style="text-align: center;">
-                            <img src="https://zmist-tech-space.fra1.cdn.digitaloceanspaces.com/2020/05/1l5NVyjcVUD3TKOT.jpg" alt="Glühwein" style="width: 100%; height: 100px; object-fit: cover; border-radius: 8px; margin-bottom: 8px;">
-                            <p style="font-size: 0.9em; margin: 0;"><strong>Glühwein</strong><br>Warm spiced wine perfect for chilly Alpine evenings.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="tape tape2"></div>
-            </div>
-            <div class="train-line" style="margin: 32px auto 16px auto; max-width: 260px; font-size: 1.1em; background: #fffbe7; border: 2.5px solid #ffb300; border-radius: 18px; text-align: center; padding: 10px 0; box-shadow: 0 4px 18px rgba(255, 193, 7, 0.13);">
-                <span class="train-emoji">🚂</span> 2h Journey: Innsbruck → Munich
-            </div>
-            <div class="city-stop">
-            <!-- Journey 4 -->
-
-                <div class="tape tape1"></div>
-                <div class="city-header">
-                    <h2 class="city-name">🇩🇪 Munich</h2>
-                </div>
-                <div class="city-description" style="background: #f8f9fa; padding: 20px; border-radius: 12px; margin-bottom: 25px; border-left: 4px solid #ff6b6b; font-size: 1.1em; line-height: 1.6; color: #444;">
-                    Bavaria's beloved capital perfectly embodies German gemütlichkeit (coziness) with its beer gardens, Gothic architecture, and world-famous Oktoberfest spirit. This cultural powerhouse seamlessly blends traditional Bavarian charm with modern sophistication, from fairy-tale castles to cutting-edge museums. Munich is where lederhosen meets luxury, and every corner radiates that distinctive Bavarian warmth and Alpine joie de vivre.
-                </div>
-                <div class="attractions-container">
-                    <div class="attraction-card">
-                        <div class="polaroid-tape"></div>
-                        <div class="attraction-header">
-                            <span class="attraction-icon">🕰️</span>
-                            <h3 class="attraction-title">Marienplatz & Glockenspiel</h3>
-                        </div>
-                        <img src="https://images.myguide-cdn.com/munich/companies/munich-highlights-private-bike-tour-with-licensed-guide/large/munich-highlights-private-bike-tour-with-licensed-guide-1133327.jpg" alt="Marienplatz" class="attraction-image">
-                        <p class="attraction-description">
-                            Munich's heart beats in this stunning Gothic square! The Glockenspiel in the New Town Hall comes alive at 11am, 12pm, and 5pm with 43 bells and 32 life-sized figures reenacting Bavarian history. Watching tourists crane their necks while the mechanical knights joust is part of the charm! The surrounding Gothic architecture is jaw-dropping, and the Christmas market here (if you're lucky enough to visit in winter) is pure magic! 🎠✨
-                        </p>
-                    </div>
-
-                    <div class="attraction-card">
-                        <div class="polaroid-tape"></div>
-                        <div class="attraction-header">
-                            <span class="attraction-icon">🌳</span>
-                            <h3 class="attraction-title">English Garden</h3>
-                        </div>
-                        <img src="https://i.pinimg.com/originals/57/76/2c/57762c61863456428c02e957283697b5.jpg" alt="English Garden" class="attraction-image">
-                        <p class="attraction-description">
-                            Bigger than Central Park and infinitely more charming! This massive green oasis in the heart of Munich is perfect for picnics, people-watching, and pretending you're a local. Don't miss the Chinese Tower beer garden where you can sip Augustiner under chestnut trees. The Japanese Tea House offers zen moments, and watching surfers at Eisbach (yes, really!) will blow your mind. Pure urban paradise! 🌿🍺
-                        </p>
-                    </div>
-
-                    <div class="attraction-card">
-                        <div class="polaroid-tape"></div>
-                        <div class="attraction-header">
-                            <span class="attraction-icon">🏰</span>
-                            <h3 class="attraction-title">Neuschwanstein Castle</h3>
-                        </div>
-                        <img src="https://www.globeguide.ca/wp-content/uploads/2014/01/Neuschwanstein-Castle-germany.jpg" alt="Neuschwanstein Castle" class="attraction-image">
-                        <p class="attraction-description">
-                            The ultimate fairy-tale castle! Built by the eccentric King Ludwig II, this 19th-century Romanesque Revival palace perched on a rugged hill is pure Disney magic come to life. The castle inspired Disney's Sleeping Beauty Castle and continues to enchant millions of visitors with its Gothic towers, ornate throne room, and breathtaking Alpine setting. The views from the Marienbrücke bridge are absolutely iconic – it's like stepping into a real-life storybook! �✨
-                        </p>
-                    </div>
-
-                    <div class="side-quest-card">
-                        <div class="side-quest-header">Urban Adventure Side Quest</div>
-                        <p class="side-quest-description">
-                            Surf watching at Eisbach – locals actually surf on a river wave in the middle of the city! This mind-blowing urban phenomenon happens year-round in the English Garden, where brave souls ride a standing wave created by the flowing water. It's completely surreal watching people surf with snow-capped Alps in the background. Even if you don't surf, the spectacle is absolutely mesmerizing and uniquely Munich! 🏄‍♂️🌊
-                        </p>
-                        <img 
-                            src="https://www.surfertoday.com/images/stories/eisbach-river-surfer.jpg" 
-                            alt="Cool people surfing in the Eisbach river" 
-                            style="flex: 1 1 180px; width: 100%; max-width: 340px; height: 180px; object-fit: cover; border-radius: 14px; box-shadow: 0 6px 18px rgba(0,0,0,0.18); border: 4px solid #fff; margin: 0;">
-                    </div>
-                </div>
-                <div class="food-section" style="margin-top: 25px; background: #fff3cd; padding: 20px; border-radius: 10px; border-left: 5px solid #ffc107;">
-                    <h3 style="color: #856404; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;"><span>🍽️</span>Local Flavors</h3>
-                    <div class="food-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
-                        <div style="text-align: center;">
-                            <img src="https://www.agoda.com/wp-content/uploads/2024/02/German-pretzel-beer-1053x700.jpg" alt="Pretzels" style="width: 100%; height: 100px; object-fit: cover; border-radius: 8px; margin-bottom: 8px;">
-                            <p style="font-size: 0.9em; margin: 0;"><strong>Bavarian Pretzels</strong><br>Salty, chewy perfection served warm with mustard.</p>
-                        </div>
-                        <div style="text-align: center;">
-                            <img src="https://www.seriouseats.com/thmb/zKq67u3TJ3B0wknpgyc-y8ymP3U=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__serious_eats__seriouseats.com__recipes__images__2013__11__20131112-turkey-weisswurst-recipe-34-ba385b3d5ab64d1786f45a7b39c20e8e.jpg" alt="Weisswurst" style="width: 100%; height: 100px; object-fit: cover; border-radius: 8px; margin-bottom: 8px;">
-                            <p style="font-size: 0.9em; margin: 0;"><strong>Weisswurst</strong><br>Traditional white sausage served with sweet mustard.</p>
-                        </div>
-                        <div style="text-align: center;">
-                            <img src="https://curiositysavestravel.com/wp-content/uploads/2019/11/Munich-beer-brewery-guide.jpg" alt="Munich Beer" style="width: 100%; height: 100px; object-fit: cover; border-radius: 8px; margin-bottom: 8px;">
-                            <p style="font-size: 0.9em; margin: 0;"><strong>Bavarian Beer</strong><br>World-famous brews best enjoyed in traditional beer halls.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="tape tape2"></div>
-            </div>
-            <div class="train-line" style="margin: 32px auto 16px auto; max-width: 260px; font-size: 1.1em; background: #fffbe7; border: 2.5px solid #ffb300; border-radius: 18px; text-align: center; padding: 10px 0; box-shadow: 0 4px 18px rgba(255, 193, 7, 0.13);">
-                <span class="train-emoji">🚂</span> 2h Journey: Munich → Salzburg
-            </div>
-            <div class="city-stop">
-            <!-- Journey 5 -->
-
-                <div class="tape tape1"></div>
-                <div class="city-header">
-                    <h2 class="city-name">🇦🇹 Salzburg</h2>
-                </div>
-                <div class="city-description" style="background: #f8f9fa; padding: 20px; border-radius: 12px; margin-bottom: 25px; border-left: 4px solid #4ecdc4; font-size: 1.1em; line-height: 1.6; color: #444;">
-                    Mozart's magical birthplace, Salzburg is a baroque masterpiece set against the dramatic backdrop of the Austrian Alps. This UNESCO World Heritage city enchants visitors with its pristine old town, magnificent palaces, and the musical legacy that echoes through every cobblestone street. From "The Sound of Music" filming locations to world-class classical concerts, Salzburg is pure cultural poetry in motion.
-                </div>
-                <div class="attractions-container">
-                    <div class="attraction-card">
-                        <div class="polaroid-tape"></div>
-                        <div class="attraction-header">
-                            <span class="attraction-icon">🎼</span>
-                            <h3 class="attraction-title">Mozart's Birthplace</h3>
-                        </div>
-                        <img src="https://photo.comptoir.fr/asset/voyage/12921/autriche/salzbourg/maison-natale-de-mozart-salzbourg-autriche-576198-1620x1080.jpg" alt="Mozart's Birthplace" class="attraction-image">
-                        <p class="attraction-description">
-                            Step into the world of history's most famous musical genius! This charming yellow house on Getreidegasse is where Wolfgang Amadeus Mozart was born in 1756. The museum showcases his childhood violin, original manuscripts, and family portraits that bring the Mozart legend to life. Walking through these rooms where a musical revolution began gives you chills. Plus, the street itself is pure medieval charm with wrought-iron signs! 🎵✨
-                        </p>
-                    </div>
-
-                    <div class="attraction-card">
-                        <div class="polaroid-tape"></div>
-                        <div class="attraction-header">
-                            <span class="attraction-icon">🏰</span>
-                            <h3 class="attraction-title">Hohensalzburg Fortress</h3>
-                        </div>
-                        <img src="https://freewalkingtoursalzburg.com/wp-content/uploads/2020/04/The-Hohensalzburg-Fotress.jpg" alt="Hohensalzburg Fortress" class="attraction-image">
-                        <p class="attraction-description">
-                            Perched high above Salzburg like something from a fairy tale, this 900-year-old fortress is one of Europe's largest medieval castles! The funicular ride up is half the fun, and the panoramic views from the top are absolutely breathtaking. Inside, explore princely chambers, medieval torture devices, and the world's oldest preserved pipe organ. The sunset views over the baroque city and surrounding Alps are pure magic! 🏰🌅
-                        </p>
-                    </div>
-
-                    <div class="attraction-card">
-                        <div class="polaroid-tape"></div>
-                        <div class="attraction-header">
-                            <span class="attraction-icon">🌸</span>
-                            <h3 class="attraction-title">Mirabell Palace & Gardens</h3>
-                        </div>
-                        <img src="https://www.bristol-salzburg.at/assets/images/sehenswuerdigkeiten/mirabellgarten/aussicht-mirabell-klein.jpg" alt="Mirabell Palace" class="attraction-image">
-                        <p class="attraction-description">
-                            These baroque gardens are where "Do-Re-Mi" from The Sound of Music was filmed! The geometric flower beds, marble statues, and perfectly manicured hedges create Instagram paradise. The palace itself hosts classical concerts in the ornate Marble Hall where Mozart once performed. The best part? The gardens offer postcard-perfect views of Hohensalzburg Fortress. Pure baroque beauty meets Hollywood magic! 🎬🌹
-                        </p>
-                    </div>
-
-                    <div class="side-quest-card">
-                        <div class="side-quest-header">Musical Side Quest</div>
-                        <p class="side-quest-description">
-                            Do the Sound of Music bike tour – cheesy but surprisingly fun, especially with friends! Pedal through the locations where Julie Andrews danced and sang, from the gazebo to the abbey. You'll visit filming spots, learn behind-the-scenes secrets, and probably end up singing along to the classics (embrace the cheese!). It's touristy perfection and the guides' enthusiasm is absolutely infectious. Edelweiss, anyone? 🚲🎵
-                        </p>
-                    </div>
-                </div>
-                <div class="food-section" style="margin-top: 25px; background: #fff3cd; padding: 20px; border-radius: 10px; border-left: 5px solid #ffc107;">
-                    <h3 style="color: #856404; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;"><span>🍽️</span>Local Flavors</h3>
-                    <div class="food-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
-                        <div style="text-align: center;">
-                            <img src="https://assets.ichkoche.at/image/1/2269.jpg?v=0&twic=v1/focus=50px50p/cover=1240x868" alt="Sachertorte" style="width: 100%; height: 100px; object-fit: cover; border-radius: 8px; margin-bottom: 8px;">
-                            <p style="font-size: 0.9em; margin: 0;"><strong>Sachertorte</strong><br>Rich chocolate cake with apricot jam, an Austrian legend.</p>
-                        </div>
-                        <div style="text-align: center;">
-                            <img src="https://cdn.shopify.com/s/files/1/0561/3553/files/5_d2cf4fad-cb59-4b66-b0d2-7a2269692a7a.jpg?v=1672889258" alt="Mozart Balls" style="width: 100%; height: 100px; object-fit: cover; border-radius: 8px; margin-bottom: 8px;">
-                            <p style="font-size: 0.9em; margin: 0;"><strong>Mozart Balls</strong><br>Marzipan and nougat sweets wrapped in dark chocolate.</p>
-                        </div>
-                        <div style="text-align: center;">
-                            <img src="https://www.germanbeer.com.au/wp-content/uploads/2023/11/german-schnapps-2.png" alt="Austrian Schnapps" style="width: 100%; height: 100px; object-fit: cover; border-radius: 8px; margin-bottom: 8px;">
-                            <p style="font-size: 0.9em; margin: 0;"><strong>Austrian Schnapps</strong><br>Clear fruit brandy perfect for digestion after dinner.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="tape tape2"></div>
-            </div>
-            <div class="train-line" style="margin: 32px auto 16px auto; max-width: 260px; font-size: 1.1em; background: #fffbe7; border: 2.5px solid #ffb300; border-radius: 18px; text-align: center; padding: 10px 0; box-shadow: 0 4px 18px rgba(255, 193, 7, 0.13);">
-                <span class="train-emoji">🚂</span> 3h Final Journey: Salzburg → Vienna
-            </div>
-            <div class="city-stop">
-            <!-- Journey 6 -->
-
-                <div class="tape tape1"></div>
-                <div class="city-header">
-                    <h2 class="city-name">🇦🇹 Vienna</h2>
-                </div>
-                <div class="attractions-container">
-                    <div class="attraction-card">
-                        <div class="polaroid-tape"></div>
-                        <div class="attraction-header">
-                            <span class="attraction-icon">🏰</span>
-                            <h3 class="attraction-title">Schönbrunn Palace</h3>
-                        </div>
-                        <img src="https://www.schoenbrunn.at//fileadmin/content_schoenbrunn/Das_Schloss/Ehrenhof_Brunnen_West.jpg" alt="Schönbrunn Palace" class="attraction-image">
-                        <p class="attraction-description">
-                            This 1,441-room baroque palace is where emperors and empresses lived their lavish lives! The opulent state rooms drip with gold, crystal chandeliers, and priceless artwork that'll leave you speechless. Don't miss the Hall of Mirrors where Mozart performed as a child prodigy. The gardens are equally stunning with manicured lawns, fountains, and the Instagram-famous Gloriette overlooking the city. It's like stepping into a real-life fairy tale! 👑✨
-                        </p>
-                    </div>
-
-                    <div class="attraction-card">
-                        <div class="polaroid-tape"></div>
-                        <div class="attraction-header">
-                            <span class="attraction-icon">⛪</span>
-                            <h3 class="attraction-title">St. Stephen's Cathedral</h3>
-                        </div>
-                        <img src="https://dynamic-media.tacdn.com/media/photo-o/2f/af/a1/61/caption.jpg" alt="St. Stephen's Cathedral" class="attraction-image">
-                        <p class="attraction-description">
-                            Vienna's Gothic masterpiece dominates the city skyline with its stunning multicolored roof tiles! Climb the 343 steps up the South Tower for breathtaking 360-degree views, or take the elevator to the North Tower's Pummerin bell. The interior is equally jaw-dropping with intricate stone carvings, beautiful stained glass, and the catacombs beneath holding centuries of history. It's the beating heart of Vienna! 🔔🌟
-                        </p>
-                    </div>
-
-                    <div class="attraction-card">
-                        <div class="polaroid-tape"></div>
-                        <div class="attraction-header">
-                            <span class="attraction-icon">☕</span>
-                            <h3 class="attraction-title">Legendary Coffeehouse Culture</h3>
-                        </div>
-                        <img src="https://fuutazbsb.filerobot.com/Freigegeben/Cafe-Central-in-Wien_Wien-Tourismus_Christian-Stemper.jpeg" alt="Café Central Vienna" class="attraction-image">
-                        <p class="attraction-description">
-                            Vienna's coffeehouse culture is a UNESCO World Heritage tradition! Café Central and Demel are temples of elegance where you can sip perfect Wiener Melange while reading newspapers and people-watching for hours. The marble tables, plush red banquettes, and the aroma of fresh coffee create pure old-world sophistication. Order a slice of Sachertorte and embrace the art of doing absolutely nothing – it's wonderfully Viennese! ☕🍰
-                        </p>
-                    </div>
-
-                    <div class="side-quest-card" style="display: flex; align-items: flex-start; gap: 28px; flex-wrap: wrap;">
-                        <div style="flex: 2 1 260px; min-width: 220px;">
-                            <div class="side-quest-header">Artistic Side Quest</div>
-                            <p class="side-quest-description">
-                                Explore the psychedelic Hundertwasserhaus – this rainbow-colored apartment building looks like it escaped from a children's storybook! Friedensreich Hundertwasser designed this architectural wonder with wonky floors, irregular windows, and rooftop gardens that defy all conventional rules. It's wonderfully weird, totally Instagram-worthy, and proves that Vienna isn't just about imperial grandeur. The nearby Hundertwasser Village has quirky shops and cafés! 🌈🏠
-                            </p>
-                        </div>
-                        <img 
-                            src="https://www.hse.ru/data/2020/07/10/1594995688/VIENA-Hundertwasserhaus.jpg" 
-                            alt="Hundertwasserhaus Vienna" 
-                            style="flex: 1 1 180px; width: 100%; max-width: 340px; height: 180px; object-fit: cover; border-radius: 14px; box-shadow: 0 6px 18px rgba(0,0,0,0.18); border: 4px solid #fff; margin: 0;">
-                    </div>
-                </div>
-                <div class="food-section" style="margin-top: 25px; background: #fff3cd; padding: 20px; border-radius: 10px; border-left: 5px solid #ffc107;">
-                    <h3 style="color: #856404; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;"><span>🍽️</span>Local Flavors</h3>
-                    <div class="food-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
-                        <div style="text-align: center;">
-                            <img src="https://dirndlkitchen.com/wp-content/uploads/2025/04/kaesespaetzle-recipe-german-cheese-spaetzle-dirndl-kitchen-1.jpg" alt="Käsespätzle" style="width: 100%; height: 100px; object-fit: cover; border-radius: 8px; margin-bottom: 8px;">
-                            <p style="font-size: 0.9em; margin: 0;"><strong>Käsespätzle</strong><br>Austrian mac and cheese with crispy onions - pure comfort.</p>
-                        </div>
-                        <div style="text-align: center;">
-                            <img src="https://recetinas.com/wp-content/uploads/2023/06/palatschinken.jpg" alt="Palatschinken" style="width: 100%; height: 100px; object-fit: cover; border-radius: 8px; margin-bottom: 8px;">
-                            <p style="font-size: 0.9em; margin: 0;"><strong>Palatschinken</strong><br>Thin crepes filled with jam, cheese, or sweet surprises.</p>
-                        </div>
-                        <div style="text-align: center;">
-                            <img src="https://i0.wp.com/media-cdn.tripadvisor.com/media/photo-m/1280/14/76/a0/54/wiener-melange.jpg?ssl=1" alt="Wiener Melange" style="width: 100%; height: 100px; object-fit: cover; border-radius: 8px; margin-bottom: 8px;">
-                            <p style="font-size: 0.9em; margin: 0;"><strong>Wiener Melange</strong><br>Vienna's signature coffee with steamed milk and foam.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="tape tape2"></div>
-            </div>
-
-            <div class="journey-stats">
-                <div class="stats-tape stats-tape1"></div>
-                <div class="stats-tape stats-tape2"></div>
-                <div class="stats-header">
-                    <span class="stats-emoji">📊</span>
-                    <h2>Epic Journey by the Numbers!</h2>
-                    <span class="stats-emoji">🎯</span>
-                </div>
-                
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <div class="stat-icon">🚂</div>
-                        <div class="stat-number">7</div>
-                        <div class="stat-label">Cities Explored</div>
-                        <div class="stat-detail">Milan → Verona → Trento → Innsbruck → Munich → Salzburg → Vienna</div>
-                    </div>
-                    
-                    <div class="stat-item">
-                        <div class="stat-icon">⏰</div>
-                        <div class="stat-number">11.5h</div>
-                        <div class="stat-label">Train Travel Time</div>
-                        <div class="stat-detail">Pure scenic bliss on rails!</div>
-                    </div>
-                    
-                    <div class="stat-item">
-                        <div class="stat-icon">🏰</div>
-                        <div class="stat-number">6</div>
-                        <div class="stat-label">Epic Castles & Palaces</div>
-                        <div class="stat-detail">From medieval to fairy-tale</div>
-                    </div>
-                    
-                    <div class="stat-item">
-                        <div class="stat-icon">🍽️</div>
-                        <div class="stat-number">15+</div>
-                        <div class="stat-label">Local Delicacies</div>
-                        <div class="stat-detail">Risotto, schnitzel & strudel!</div>
-                    </div>
-                    
-                    <div class="stat-item">
-                        <div class="stat-icon">🎭</div>
-                        <div class="stat-number">18</div>
-                        <div class="stat-label">Amazing Attractions</div>
-                        <div class="stat-detail">From cathedrals to cable cars</div>
-                    </div>
-                    
-                    <div class="stat-item">
-                        <div class="stat-icon">🎵</div>
-                        <div class="stat-number">3</div>
-                        <div class="stat-label">Musical Legends</div>
-                        <div class="stat-detail">Mozart, La Scala & Sound of Music</div>
-                    </div>
-                </div>
-                
-                <div class="stats-footer">
-                    <div class="stats-quote">
-                        "✨ Adventures are the best way to learn ✨"
-                    </div>
-                    <div class="stats-subtext">
-                        An unforgettable journey through the heart of Europe! 🇮🇹🇦🇹🇩🇪
-                    </div>
-                </div>
-            </div>
+          </div>
+          <div class="tape tape2"></div>
         </div>
+        <div class="train-line">
+          <span class="train-emoji">🚂</span> 1.5h Journey: Milan → Verona
+        </div>
+        <div class="city-stop">
+          <!-- Journey 1 -->
+          <div class="tape tape1"></div>
+          <div class="city-header">
+            <h2 class="city-name">🇮🇹 Verona</h2>
+          </div>
+          <div
+            class="city-description"
+            style="
+              background: #f8f9fa;
+              padding: 20px;
+              border-radius: 12px;
+              margin-bottom: 25px;
+              border-left: 4px solid #ff6b6b;
+              font-size: 1.1em;
+              line-height: 1.6;
+              color: #444;
+            "
+          >
+            Shakespeare's romantic stage come to life, Verona is a perfectly
+            preserved medieval city where Roman history meets Renaissance
+            beauty. This UNESCO World Heritage site enchants visitors with its
+            ancient Roman arena, charming piazzas, and of course, the legendary
+            balcony of Juliet. Every cobblestone street tells a story of love,
+            drama, and timeless Italian charm.
+          </div>
+          <div class="attractions-container">
+            <div class="attraction-card">
+              <div class="polaroid-tape"></div>
+              <div class="attraction-header">
+                <span class="attraction-icon">💕</span>
+                <h3 class="attraction-title">Juliet's House &amp; Balcony</h3>
+              </div>
+              <img
+                alt="Juliet's House"
+                class="attraction-image"
+                src="img/Juliet_s_House.jpg"
+              />
+              <p class="attraction-description">
+                Yes, it's touristy, but it's also ridiculously romantic! This
+                13th-century house (maybe) belonged to the Capulets, and the
+                famous balcony scene comes alive here. The courtyard walls are
+                covered in love letters and graffiti from hopeless romantics
+                worldwide. Touch Juliet's bronze statue for good luck in love,
+                then strike a pose on the balcony for the ultimate Romeo and
+                Juliet moment! 💌
+              </p>
+            </div>
+            <div class="attraction-card">
+              <div class="polaroid-tape"></div>
+              <div class="attraction-header">
+                <span class="attraction-icon">🏛️</span>
+                <h3 class="attraction-title">Arena di Verona</h3>
+              </div>
+              <img
+                alt="Arena di Verona"
+                class="attraction-image"
+                src="img/Arena_di_Verona.jpg"
+              />
+              <p class="attraction-description">
+                This Roman amphitheater is older than the Colosseum and in
+                incredible condition! Built in 30 AD, it still hosts world-class
+                opera performances under the stars. Even without a show, walking
+                through this ancient venue gives you chills. Imagine gladiators
+                fighting here 2,000 years ago! The acoustics are so perfect you
+                can hear a whisper from across the arena. Absolutely
+                mind-blowing! 🏺
+              </p>
+            </div>
+            <div class="attraction-card">
+              <div class="polaroid-tape"></div>
+              <div class="attraction-header">
+                <span class="attraction-icon">🏛️</span>
+                <h3 class="attraction-title">Torre dei Lamberti</h3>
+              </div>
+              <img
+                alt="Torre dei Lamberti"
+                class="attraction-image"
+                src="img/Torre_dei_Lamberti.jpg"
+              />
+              <p class="attraction-description">
+                Verona's tallest medieval tower at 84 meters high! This striking
+                brick tower has been watching over the city since the 12th
+                century. Climb to the top (or take the elevator if you prefer)
+                for absolutely breathtaking panoramic views of Verona's
+                red-tiled rooftops, the Arena, and the surrounding hills. The
+                golden hour views are particularly magical, making it the
+                perfect spot for epic Instagram shots that'll make your
+                followers weep with envy!
+              </p>
+            </div>
+            <div class="side-quest-card">
+              <div class="side-quest-header">Adventure Side Quest</div>
+              <p class="side-quest-description">
+                Hunt for the coolest street art and hidden courtyards in
+                Verona's medieval maze! This ancient city is packed with secret
+                passages, hidden doorways, and unexpected murals tucked between
+                the tourist spots. Challenge each other to find the most epic
+                photo spots - medieval arches, colorful shutters, vintage Vespa
+                sightings, and street art that locals have created. It's like a
+                real-life treasure hunt through 2,000 years of history, perfect
+                for some seriously cool Instagram content! 🏛️📸
+              </p>
+            </div>
+          </div>
+          <div
+            class="food-section"
+            style="
+              margin-top: 25px;
+              background: #fff3cd;
+              padding: 20px;
+              border-radius: 10px;
+              border-left: 5px solid #ffc107;
+            "
+          >
+            <h3
+              style="
+                color: #856404;
+                margin-bottom: 15px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+              "
+            >
+              <span>🍽️</span>Local Flavors
+            </h3>
+            <div
+              class="food-grid"
+              style="
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 15px;
+              "
+            >
+              <div style="text-align: center">
+                <img
+                  alt="Risotto all'Amarone"
+                  src="img/Risotto_all_Amarone.jpg"
+                  style="
+                    width: 100%;
+                    height: 100px;
+                    object-fit: cover;
+                    border-radius: 8px;
+                    margin-bottom: 8px;
+                  "
+                />
+                <p style="font-size: 0.9em; margin: 0">
+                  <strong>Risotto all'Amarone</strong> 🌱<br />Vegetarian!
+                  Creamy risotto with local Amarone wine - absolutely divine.
+                </p>
+              </div>
+              <div style="text-align: center">
+                <img
+                  alt="Gnocchi di Malga"
+                  src="img/Gnocchi_di_Malga.jpg"
+                  style="
+                    width: 100%;
+                    height: 100px;
+                    object-fit: cover;
+                    border-radius: 8px;
+                    margin-bottom: 8px;
+                  "
+                />
+                <p style="font-size: 0.9em; margin: 0">
+                  <strong>Gnocchi di Malga</strong><br />Fluffy potato dumplings
+                  with mountain cheese and butter.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="tape tape2"></div>
+        </div>
+        <div class="train-line">
+          <span class="train-emoji">🚂</span> 2h Journey: Verona → Trento
+        </div>
+        <div class="city-stop">
+          <!-- Journey 2 -->
+          <div class="tape tape1"></div>
+          <div class="city-header">
+            <h2 class="city-name">🇮🇹 Trento</h2>
+            <span
+              style="
+                background: #ff6b6b;
+                color: white;
+                padding: 5px 10px;
+                border-radius: 15px;
+                font-size: 0.8em;
+              "
+              >Day Trip</span
+            >
+          </div>
+          <div
+            class="city-description"
+            style="
+              background: #f8f9fa;
+              padding: 20px;
+              border-radius: 12px;
+              margin-bottom: 25px;
+              border-left: 4px solid #ffb74d;
+              font-size: 1.1em;
+              line-height: 1.6;
+              color: #444;
+            "
+          >
+            Nestled in the heart of the Dolomites, Trento is where Italian
+            warmth meets Alpine grandeur. This historic city was once the seat
+            of the famous Council of Trent that shaped Catholic history, and
+            today it's a perfect gateway to mountain adventures. With its
+            Renaissance frescoes, medieval castles, and breathtaking cable car
+            rides to mountain peaks, Trento offers an unforgettable taste of
+            Italy's mountainous north.
+          </div>
+          <div class="attractions-container">
+            <div class="attraction-card">
+              <div class="polaroid-tape"></div>
+              <div class="attraction-header">
+                <span class="attraction-icon">⛪</span>
+                <h3 class="attraction-title">Duomo di Trento</h3>
+              </div>
+              <img
+                alt="Duomo di Trento"
+                class="attraction-image"
+                src="img/Duomo_di_Trento.jpg"
+              />
+              <p class="attraction-description">
+                This Romanesque cathedral is where the famous Council of Trent
+                met to shape Catholic history! The stunning frescoes inside tell
+                epic biblical stories in vivid colors, and the rose window
+                creates the most magical light patterns. The crypt beneath holds
+                ancient treasures, and the bell tower offers panoramic views of
+                the Alps. It's like a spiritual and artistic masterpiece rolled
+                into one incredible experience! ⛪✨
+              </p>
+            </div>
+            <div class="attraction-card">
+              <div class="polaroid-tape"></div>
+              <div class="attraction-header">
+                <span class="attraction-icon">🏰</span>
+                <h3 class="attraction-title">
+                  Buonconsiglio Castle &amp; Alpine Views
+                </h3>
+              </div>
+              <div
+                style="
+                  display: flex;
+                  flex-wrap: wrap;
+                  gap: 18px;
+                  align-items: flex-start;
+                "
+              >
+                <img
+                  alt="Buonconsiglio Castle"
+                  class="attraction-image"
+                  src="img/Buonconsiglio_Castle.jpg"
+                  style="max-width: 320px"
+                />
+                <img
+                  alt="View from inside Buonconsiglio Castle looking at mountains"
+                  class="attraction-image"
+                  src="img/View_from_inside_Buonconsiglio_Castle_lo.jpg"
+                  style="max-width: 320px"
+                />
+              </div>
+              <p class="attraction-description">
+                This fortress is like stepping into a Renaissance fairy tale!
+                The castle complex spans centuries of history, from medieval
+                towers to elegant Renaissance frescoes. The famous "Cycle of the
+                Months" frescoes are absolutely breathtaking – medieval
+                Instagram before Instagram existed!<br /><br />
+                The breathtaking mountain views from inside Buonconsiglio Castle
+                are absolutely spectacular! From the castle windows and
+                terraces, you can gaze out at the stunning Alpine panorama that
+                surrounds Trento. The dramatic peaks of the Dolomites create a
+                majestic backdrop that changes color throughout the day. These
+                views perfectly capture why this fortress was chosen as a
+                strategic location – it's like having a front-row seat to
+                nature's grandest theater! 🏔️✨
+              </p>
+            </div>
+            <div class="attraction-card">
+              <div class="polaroid-tape"></div>
+              <div class="attraction-header">
+                <span class="attraction-icon">🚡</span>
+                <h3 class="attraction-title">Cable Car to Sardagna</h3>
+              </div>
+              <img
+                alt="Cable Car at the Foot of the Dolomite Alps"
+                class="attraction-image"
+                src="img/Cable_Car.jpg"
+              />
+              <p class="attraction-description">
+                Take the cable car up to Sardagna for jaw-dropping Alpine
+                panoramas! This thrilling ride lifts you high above Trento,
+                offering spectacular mountain vistas and a bird's-eye view of
+                the city below. Whether you're just enjoying the scenery or
+                feeling adventurous enough to try paragliding, the sunset views
+                over the Dolomites will leave you speechless. It's pure
+                adrenaline and Instagram gold! 🪂🏔️
+              </p>
+            </div>
+          </div>
+          <div
+            class="food-section"
+            style="
+              margin-top: 25px;
+              background: #fff3cd;
+              padding: 20px;
+              border-radius: 10px;
+              border-left: 5px solid #ffc107;
+            "
+          >
+            <h3
+              style="
+                color: #856404;
+                margin-bottom: 15px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+              "
+            >
+              <span>🍽️</span>Local Flavors
+            </h3>
+            <div
+              class="food-grid"
+              style="
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 15px;
+              "
+            >
+              <div style="text-align: center">
+                <img
+                  alt="Apple Strudel"
+                  src="img/Apple_Strudel.jpg"
+                  style="
+                    width: 100%;
+                    height: 100px;
+                    object-fit: cover;
+                    border-radius: 8px;
+                    margin-bottom: 8px;
+                  "
+                />
+                <p style="font-size: 0.9em; margin: 0">
+                  <strong>Apple Strudel</strong><br />Flaky pastry filled with
+                  spiced apples, a South Tyrolean classic.
+                </p>
+              </div>
+              <div style="text-align: center">
+                <img
+                  alt="Speck Alto Adige"
+                  src="img/Speck_Alto_Adige.jpg"
+                  style="
+                    width: 100%;
+                    height: 100px;
+                    object-fit: cover;
+                    border-radius: 8px;
+                    margin-bottom: 8px;
+                  "
+                />
+                <p style="font-size: 0.9em; margin: 0">
+                  <strong>Speck Alto Adige</strong><br />Smoky cured ham from
+                  the mountains, perfect with local bread.
+                </p>
+              </div>
+              <div style="text-align: center">
+                <img
+                  alt="Local Wines"
+                  src="img/Local_Wines.png"
+                  style="
+                    width: 100%;
+                    height: 100px;
+                    object-fit: cover;
+                    border-radius: 8px;
+                    margin-bottom: 8px;
+                  "
+                />
+                <p style="font-size: 0.9em; margin: 0">
+                  <strong>Local Wines</strong><br />Crisp whites and elegant
+                  reds from Trentino's mountain vineyards.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="tape tape2"></div>
+        </div>
+        <div class="train-line">
+          <span class="train-emoji">🚂</span> 3h Journey: Trento → Innsbruck
+        </div>
+        <div class="city-stop">
+          <!-- Journey 3 -->
+          <div class="tape tape1"></div>
+          <div class="city-header">
+            <h2 class="city-name">🇦🇹 Innsbruck</h2>
+          </div>
+          <div
+            class="city-description"
+            style="
+              background: #f8f9fa;
+              padding: 20px;
+              border-radius: 12px;
+              margin-bottom: 25px;
+              border-left: 4px solid #4ecdc4;
+              font-size: 1.1em;
+              line-height: 1.6;
+              color: #444;
+            "
+          >
+            The crown jewel of the Austrian Alps, Innsbruck is where imperial
+            history meets mountain majesty in the most spectacular setting
+            imaginable. This former imperial residence offers a unique blend of
+            baroque architecture, world-class skiing culture, and cutting-edge
+            Alpine design. With cable cars whisking you from medieval old town
+            to snow-capped peaks in minutes, Innsbruck is pure Alpine magic.
+          </div>
+          <div class="attractions-container">
+            <div class="attraction-card">
+              <div class="polaroid-tape"></div>
+              <div class="attraction-header">
+                <span class="attraction-icon">🏛️</span>
+                <h3 class="attraction-title">Goldenes Dachl (Golden Roof)</h3>
+              </div>
+              <div
+                style="
+                  display: flex;
+                  flex-wrap: wrap;
+                  gap: 18px;
+                  align-items: flex-start;
+                "
+              >
+                <img
+                  alt="Goldenes Dachl"
+                  class="attraction-image"
+                  src="img/Goldenes_Dachl.jpg"
+                />
+                <img
+                  alt="A close up view of the roof"
+                  class="attraction-image"
+                  src="img/A_close_up_view_of_the_roof.jpg"
+                />
+              </div>
+              <p class="attraction-description">
+                This iconic golden roof is Innsbruck's crown jewel! Built by
+                Emperor Maximilian I in 1500, the balcony is covered with 2,657
+                fire-gilded copper tiles that gleam like pure gold in the
+                sunlight. It was designed as a royal box seat for watching
+                tournaments in the square below. Today, it's the perfect
+                backdrop for your "I'm living my best Alpine life" photos. The
+                surrounding Gothic architecture makes it even more magical! ✨👑
+              </p>
+            </div>
+            <div class="attraction-card">
+              <div class="polaroid-tape"></div>
+              <div class="attraction-header">
+                <span class="attraction-icon">🚠</span>
+                <h3 class="attraction-title">
+                  Nordkette Cable Car Alpine Views
+                </h3>
+              </div>
+              <img
+                alt="Nordkette Cable Car"
+                class="attraction-image"
+                src="img/Nordkette_Cable_Car.jpg"
+              />
+              <p class="attraction-description">
+                From city center to 2,000 meters in just 20 minutes – this cable
+                car journey is pure Alpine magic! The ultra-modern Zaha
+                Hadid-designed stations look like spaceships, and the views get
+                more spectacular with each stop. At the top, you're literally
+                standing on a mountain peak with 360-degree panoramas of
+                snow-capped peaks and the Inn Valley below. It's like being on
+                top of the world! 🏔️🚠
+              </p>
+            </div>
+            <div class="attraction-card">
+              <div class="polaroid-tape"></div>
+              <div class="attraction-header">
+                <span class="attraction-icon">🚠</span>
+                <h3 class="attraction-title">
+                  Swarovski Crystal Worlds
+                </h3>
+              </div>
+              <img
+                alt="Swarovski Crystal Worlds"
+                class="attraction-image"
+                src="img/crystal.jpg"
+              />
+              <p class="attraction-description">
+                A wonderland of crystal artistry just outside Innsbruck! This underground museum is like stepping into a glittering dream where art meets engineering in the most spectacular way. Giant crystal chambers house mind-bending installations by world-renowned artists - think crystal clouds you can walk through, walls that shimmer like rainbows, and interactive exhibits that respond to your touch with cascades of light and sound. The Giant's head entrance alone will blow your mind, and the crystal garden outside is pure Instagram magic. It's wonderfully surreal, totally unique, and proves that crystals aren't just for jewelry! ✨💎
+              </p>
+            </div>
+            <div class="side-quest-card">
+              <div class="side-quest-header">Alpine Adventure Side Quest</div>
+              <p class="side-quest-description">
+                Challenge each other to the Innsbruck Cliff Walk at Stubai Glacier – it's pure adrenaline with epic bragging rights! This suspended walkway juts out over a 1,000-meter drop with nothing but glass between you and the abyss. See who can walk to the edge without getting weak knees! The 360-degree Alpine views are absolutely insane, and the photos will make everyone back home think you're completely fearless. Plus, you can grab beers afterward and laugh about who looked more terrified! 🏔️😱
+              </p>
+
+              <img
+                alt="Guy sitting on a bridge"
+                src="img/cliff.jpg"
+                style="
+                  flex: 1 1 180px;
+                  width: 100%;
+                  max-width: 340px;
+                  height: 180px;
+                  object-fit: cover;
+                  border-radius: 14px;
+                  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+                  border: 4px solid #fff;
+                  margin: 0;
+                "
+              />
+            </div>
+          </div>
+          <div
+            class="food-section"
+            style="
+              margin-top: 25px;
+              background: #fff3cd;
+              padding: 20px;
+              border-radius: 10px;
+              border-left: 5px solid #ffc107;
+            "
+          >
+            <h3
+              style="
+                color: #856404;
+                margin-bottom: 15px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+              "
+            >
+              <span>🍽️</span>Local Flavors
+            </h3>
+            <div
+              class="food-grid"
+              style="
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 15px;
+              "
+            >
+              <div style="text-align: center">
+                <img
+                  alt="Schnitzel"
+                  src="img/Schnitzel.jpg"
+                  style="
+                    width: 100%;
+                    height: 100px;
+                    object-fit: cover;
+                    border-radius: 8px;
+                    margin-bottom: 8px;
+                  "
+                />
+                <p style="font-size: 0.9em; margin: 0">
+                  <strong>Wiener Schnitzel</strong><br />Golden breaded cutlet,
+                  Austria's most famous dish.
+                </p>
+              </div>
+              <div style="text-align: center">
+                <img
+                  alt="Apple Strudel"
+                  src="img/Kaiserschmarrn.webp"
+                  style="
+                    width: 100%;
+                    height: 100px;
+                    object-fit: cover;
+                    border-radius: 8px;
+                    margin-bottom: 8px;
+                  "
+                />
+                <p style="font-size: 0.9em; margin: 0">
+                  <strong>Kaiserschmarrn</strong><br />Arguably the most famous Austrian dessert. Fluffy, shredded pancake with sweet fruit compote. 
+                </p>
+              </div>
+              <div style="text-align: center">
+                <img
+                  alt="Glühwein"
+                  src="img/Gl_hwein.jpg"
+                  style="
+                    width: 100%;
+                    height: 100px;
+                    object-fit: cover;
+                    border-radius: 8px;
+                    margin-bottom: 8px;
+                  "
+                />
+                <p style="font-size: 0.9em; margin: 0">
+                  <strong>Glühwein</strong><br />Warm spiced wine perfect for
+                  chilly Alpine evenings.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="tape tape2"></div>
+        </div>
+        <div
+          class="train-line"
+          style="
+            margin: 32px auto 16px auto;
+            max-width: 260px;
+            font-size: 1.1em;
+            background: #fffbe7;
+            border: 2.5px solid #ffb300;
+            border-radius: 18px;
+            text-align: center;
+            padding: 10px 0;
+            box-shadow: 0 4px 18px rgba(255, 193, 7, 0.13);
+          "
+        >
+          <span class="train-emoji">🚂</span> 2h Journey: Innsbruck → Munich
+        </div>
+        <div class="city-stop">
+          <!-- Journey 4 -->
+          <div class="tape tape1"></div>
+          <div class="city-header">
+            <h2 class="city-name">🇩🇪 Munich</h2>
+          </div>
+          <div
+            class="city-description"
+            style="
+              background: #f8f9fa;
+              padding: 20px;
+              border-radius: 12px;
+              margin-bottom: 25px;
+              border-left: 4px solid #ff6b6b;
+              font-size: 1.1em;
+              line-height: 1.6;
+              color: #444;
+            "
+          >
+            Bavaria's beloved capital perfectly embodies German gemütlichkeit
+            (coziness) with its beer gardens, Gothic architecture, and
+            world-famous Oktoberfest spirit. This cultural powerhouse seamlessly
+            blends traditional Bavarian charm with modern sophistication, from
+            fairy-tale castles to cutting-edge museums. Munich is where
+            lederhosen meets luxury, and every corner radiates that distinctive
+            Bavarian warmth and Alpine joie de vivre.
+          </div>
+          <div class="attractions-container">
+            <div class="attraction-card">
+              <div class="polaroid-tape"></div>
+              <div class="attraction-header">
+                <span class="attraction-icon">🕰️</span>
+                <h3 class="attraction-title">Marienplatz &amp; Glockenspiel</h3>
+              </div>
+              <img
+                alt="Marienplatz"
+                class="attraction-image"
+                src="img/Marienplatz.jpg"
+              />
+              <p class="attraction-description">
+                Munich's heart beats in this stunning Gothic square! The
+                Glockenspiel in the New Town Hall comes alive at 11am, 12pm, and
+                5pm with 43 bells and 32 life-sized figures reenacting Bavarian
+                history. Watching tourists crane their necks while the
+                mechanical knights joust is part of the charm! The surrounding
+                Gothic architecture is jaw-dropping, and the Christmas market
+                here (if you're lucky enough to visit in winter) is pure magic!
+                🎠✨
+              </p>
+            </div>
+            <div class="attraction-card">
+              <div class="polaroid-tape"></div>
+              <div class="attraction-header">
+                <span class="attraction-icon">🌳</span>
+                <h3 class="attraction-title">English Garden</h3>
+              </div>
+              <img
+                alt="English Garden"
+                class="attraction-image"
+                src="img/English_Garden.jpg"
+              />
+              <p class="attraction-description">
+                Bigger than Central Park and infinitely more charming! This
+                massive green oasis in the heart of Munich is perfect for
+                picnics, people-watching, and pretending you're a local. Don't
+                miss the Chinese Tower beer garden where you can sip Augustiner
+                under chestnut trees. The Japanese Tea House offers zen moments,
+                and watching surfers at Eisbach (yes, really!) will blow your
+                mind. Pure urban paradise! 🌿🍺
+              </p>
+            </div>
+            <div class="attraction-card">
+              <div class="polaroid-tape"></div>
+              <div class="attraction-header">
+                <span class="attraction-icon">🏰</span>
+                <h3 class="attraction-title">Neuschwanstein Castle</h3>
+              </div>
+              <img
+                alt="Neuschwanstein Castle"
+                class="attraction-image"
+                src="img/Neuschwanstein_Castle.jpg"
+              />
+              <p class="attraction-description">
+                The ultimate fairy-tale castle! Built by the eccentric King
+                Ludwig II, this 19th-century Romanesque Revival palace perched
+                on a rugged hill is pure Disney magic come to life. The castle
+                inspired Disney's Sleeping Beauty Castle and continues to
+                enchant millions of visitors with its Gothic towers, ornate
+                throne room, and breathtaking Alpine setting. The views from the
+                Marienbrücke bridge are absolutely iconic – it's like stepping
+                into a real-life storybook!
+              </p>
+            </div>
+            <div class="side-quest-card">
+              <div class="side-quest-header">Urban Adventure Side Quest</div>
+              <p class="side-quest-description">
+                Surf watching at Eisbach – locals actually surf on a river wave
+                in the middle of the city! This mind-blowing urban phenomenon
+                happens year-round in the English Garden, where brave souls ride
+                a standing wave created by the flowing water. It's completely
+                surreal watching people surf with snow-capped Alps in the
+                background. Even if you don't surf, the spectacle is absolutely
+                mesmerizing and uniquely Munich! 🏄‍♂️🌊
+              </p>
+              <img
+                alt="Cool people surfing in the Eisbach river"
+                src="img/Cool_people_surfing_in_the_Eisbach_river.jpg"
+                style="
+                  flex: 1 1 180px;
+                  width: 100%;
+                  max-width: 340px;
+                  height: 180px;
+                  object-fit: cover;
+                  border-radius: 14px;
+                  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+                  border: 4px solid #fff;
+                  margin: 0;
+                "
+              />
+            </div>
+          </div>
+          <div
+            class="food-section"
+            style="
+              margin-top: 25px;
+              background: #fff3cd;
+              padding: 20px;
+              border-radius: 10px;
+              border-left: 5px solid #ffc107;
+            "
+          >
+            <h3
+              style="
+                color: #856404;
+                margin-bottom: 15px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+              "
+            >
+              <span>🍽️</span>Local Flavors
+            </h3>
+            <div
+              class="food-grid"
+              style="
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 15px;
+              "
+            >
+              <div style="text-align: center">
+                <img
+                  alt="Pretzels"
+                  src="img/Pretzels.jpg"
+                  style="
+                    width: 100%;
+                    height: 100px;
+                    object-fit: cover;
+                    border-radius: 8px;
+                    margin-bottom: 8px;
+                  "
+                />
+                <p style="font-size: 0.9em; margin: 0">
+                  <strong>Bavarian Pretzels</strong><br />Salty, chewy
+                  perfection served warm with mustard.
+                </p>
+              </div>
+              <div style="text-align: center">
+                <img
+                  alt="Weisswurst"
+                  src="img/Weisswurst.jpg"
+                  style="
+                    width: 100%;
+                    height: 100px;
+                    object-fit: cover;
+                    border-radius: 8px;
+                    margin-bottom: 8px;
+                  "
+                />
+                <p style="font-size: 0.9em; margin: 0">
+                  <strong>Weisswurst</strong><br />Traditional white sausage
+                  served with sweet mustard.
+                </p>
+              </div>
+              <div style="text-align: center">
+                <img
+                  alt="Munich Beer"
+                  src="img/Munich_Beer.jpg"
+                  style="
+                    width: 100%;
+                    height: 100px;
+                    object-fit: cover;
+                    border-radius: 8px;
+                    margin-bottom: 8px;
+                  "
+                />
+                <p style="font-size: 0.9em; margin: 0">
+                  <strong>Bavarian Beer</strong><br />World-famous brews best
+                  enjoyed in traditional beer halls.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="tape tape2"></div>
+        </div>
+        <div
+          class="train-line"
+          style="
+            margin: 32px auto 16px auto;
+            max-width: 260px;
+            font-size: 1.1em;
+            background: #fffbe7;
+            border: 2.5px solid #ffb300;
+            border-radius: 18px;
+            text-align: center;
+            padding: 10px 0;
+            box-shadow: 0 4px 18px rgba(255, 193, 7, 0.13);
+          "
+        >
+          <span class="train-emoji">🚂</span> 2h Journey: Munich → Salzburg
+        </div>
+        <div class="city-stop">
+          <!-- Journey 5 -->
+          <div class="tape tape1"></div>
+          <div class="city-header">
+            <h2 class="city-name">🇦🇹 Salzburg</h2>
+          </div>
+          <div
+            class="city-description"
+            style="
+              background: #f8f9fa;
+              padding: 20px;
+              border-radius: 12px;
+              margin-bottom: 25px;
+              border-left: 4px solid #4ecdc4;
+              font-size: 1.1em;
+              line-height: 1.6;
+              color: #444;
+            "
+          >
+            Mozart's magical birthplace, Salzburg is a baroque masterpiece set
+            against the dramatic backdrop of the Austrian Alps. This UNESCO
+            World Heritage city enchants visitors with its pristine old town,
+            magnificent palaces, and the musical legacy that echoes through
+            every cobblestone street. From "The Sound of Music" filming
+            locations to world-class classical concerts, Salzburg is pure
+            cultural poetry in motion.
+          </div>
+          <div class="attractions-container">
+            <div class="attraction-card">
+              <div class="polaroid-tape"></div>
+              <div class="attraction-header">
+                <span class="attraction-icon">🎼</span>
+                <h3 class="attraction-title">Mozart's Birthplace</h3>
+              </div>
+              <img
+                alt="Mozart's Birthplace"
+                class="attraction-image"
+                src="img/Mozart_s_Birthplace.jpg"
+              />
+              <p class="attraction-description">
+                Step into the world of history's most famous musical genius!
+                This charming yellow house on Getreidegasse is where Wolfgang
+                Amadeus Mozart was born in 1756. The museum showcases his
+                childhood violin, original manuscripts, and family portraits
+                that bring the Mozart legend to life. Walking through these
+                rooms where a musical revolution began gives you chills. Plus,
+                the street itself is pure medieval charm with wrought-iron
+                signs! 🎵✨
+              </p>
+            </div>
+            <div class="attraction-card">
+              <div class="polaroid-tape"></div>
+              <div class="attraction-header">
+                <span class="attraction-icon">🏰</span>
+                <h3 class="attraction-title">Hohensalzburg Fortress</h3>
+              </div>
+              <img
+                alt="Hohensalzburg Fortress"
+                class="attraction-image"
+                src="img/Hohensalzburg_Fortress.jpg"
+              />
+              <p class="attraction-description">
+                Perched high above Salzburg like something from a fairy tale,
+                this 900-year-old fortress is one of Europe's largest medieval
+                castles! The funicular ride up is half the fun, and the
+                panoramic views from the top are absolutely breathtaking.
+                Inside, explore princely chambers, medieval torture devices, and
+                the world's oldest preserved pipe organ. The sunset views over
+                the baroque city and surrounding Alps are pure magic! 🏰🌅
+              </p>
+            </div>
+            <div class="attraction-card">
+              <div class="polaroid-tape"></div>
+              <div class="attraction-header">
+                <span class="attraction-icon">🌸</span>
+                <h3 class="attraction-title">Mirabell Palace &amp; Gardens</h3>
+              </div>
+              <img
+                alt="Mirabell Palace"
+                class="attraction-image"
+                src="img/Mirabell_Palace.jpg"
+              />
+              <p class="attraction-description">
+                These baroque gardens are where "Do-Re-Mi" from The Sound of
+                Music was filmed! The geometric flower beds, marble statues, and
+                perfectly manicured hedges create Instagram paradise. The palace
+                itself hosts classical concerts in the ornate Marble Hall where
+                Mozart once performed. The best part? The gardens offer
+                postcard-perfect views of Hohensalzburg Fortress. Pure baroque
+                beauty meets Hollywood magic! 🎬🌹
+              </p>
+            </div>
+            <div class="side-quest-card">
+              <div class="side-quest-header">Musical Side Quest</div>
+              <p class="side-quest-description">
+                Do the Sound of Music bike tour – cheesy but surprisingly fun,
+                especially with friends! Pedal through the locations where Julie
+                Andrews danced and sang, from the gazebo to the abbey. You'll
+                visit filming spots, learn behind-the-scenes secrets, and
+                probably end up singing along to the classics (embrace the
+                cheese!). It's touristy perfection and the guides' enthusiasm is
+                absolutely infectious. Edelweiss, anyone? 🚲🎵
+              </p>
+            </div>
+          </div>
+          <div
+            class="food-section"
+            style="
+              margin-top: 25px;
+              background: #fff3cd;
+              padding: 20px;
+              border-radius: 10px;
+              border-left: 5px solid #ffc107;
+            "
+          >
+            <h3
+              style="
+                color: #856404;
+                margin-bottom: 15px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+              "
+            >
+              <span>🍽️</span>Local Flavors
+            </h3>
+            <div
+              class="food-grid"
+              style="
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 15px;
+              "
+            >
+              <div style="text-align: center">
+                <img
+                  alt="Sachertorte"
+                  src="img/Sachertorte.jpg"
+                  style="
+                    width: 100%;
+                    height: 100px;
+                    object-fit: cover;
+                    border-radius: 8px;
+                    margin-bottom: 8px;
+                  "
+                />
+                <p style="font-size: 0.9em; margin: 0">
+                  <strong>Sachertorte</strong><br />Rich chocolate cake with
+                  apricot jam, an Austrian legend.
+                </p>
+              </div>
+              <div style="text-align: center">
+                <img
+                  alt="Mozart Balls"
+                  src="img/Mozart_Balls.jpg"
+                  style="
+                    width: 100%;
+                    height: 100px;
+                    object-fit: cover;
+                    border-radius: 8px;
+                    margin-bottom: 8px;
+                  "
+                />
+                <p style="font-size: 0.9em; margin: 0">
+                  <strong>Mozart Balls</strong><br />Marzipan and nougat sweets
+                  wrapped in dark chocolate.
+                </p>
+              </div>
+              <div style="text-align: center">
+                <img
+                  alt="Austrian Schnapps"
+                  src="img/Austrian_Schnapps.png"
+                  style="
+                    width: 100%;
+                    height: 100px;
+                    object-fit: cover;
+                    border-radius: 8px;
+                    margin-bottom: 8px;
+                  "
+                />
+                <p style="font-size: 0.9em; margin: 0">
+                  <strong>Austrian Schnapps</strong><br />Clear fruit brandy
+                  perfect for digestion after dinner.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="tape tape2"></div>
+        </div>
+        <div
+          class="train-line"
+          style="
+            margin: 32px auto 16px auto;
+            max-width: 260px;
+            font-size: 1.1em;
+            background: #fffbe7;
+            border: 2.5px solid #ffb300;
+            border-radius: 18px;
+            text-align: center;
+            padding: 10px 0;
+            box-shadow: 0 4px 18px rgba(255, 193, 7, 0.13);
+          "
+        >
+          <span class="train-emoji">🚂</span> 3h Final Journey: Salzburg →
+          Vienna
+        </div>
+        <div class="city-stop">
+          <!-- Journey 6 -->
+          <div class="tape tape1"></div>
+          <div class="city-header">
+            <h2 class="city-name">🇦🇹 Vienna</h2>
+          </div>
+          <div class="attractions-container">
+            <div class="attraction-card">
+              <div class="polaroid-tape"></div>
+              <div class="attraction-header">
+                <span class="attraction-icon">🏰</span>
+                <h3 class="attraction-title">Schönbrunn Palace</h3>
+              </div>
+              <img
+                alt="Schönbrunn Palace"
+                class="attraction-image"
+                src="img/Sch_nbrunn_Palace.jpg"
+              />
+              <p class="attraction-description">
+                This 1,441-room baroque palace is where emperors and empresses
+                lived their lavish lives! The opulent state rooms drip with
+                gold, crystal chandeliers, and priceless artwork that'll leave
+                you speechless. Don't miss the Hall of Mirrors where Mozart
+                performed as a child prodigy. The gardens are equally stunning
+                with manicured lawns, fountains, and the Instagram-famous
+                Gloriette overlooking the city. It's like stepping into a
+                real-life fairy tale! 👑✨
+              </p>
+            </div>
+            <div class="attraction-card">
+              <div class="polaroid-tape"></div>
+              <div class="attraction-header">
+                <span class="attraction-icon">⛪</span>
+                <h3 class="attraction-title">St. Stephen's Cathedral</h3>
+              </div>
+              <img
+                alt="St. Stephen's Cathedral"
+                class="attraction-image"
+                src="img/St__Stephen_s_Cathedral.jpg"
+              />
+              <p class="attraction-description">
+                Vienna's Gothic masterpiece dominates the city skyline with its
+                stunning multicolored roof tiles! Climb the 343 steps up the
+                South Tower for breathtaking 360-degree views, or take the
+                elevator to the North Tower's Pummerin bell. The interior is
+                equally jaw-dropping with intricate stone carvings, beautiful
+                stained glass, and the catacombs beneath holding centuries of
+                history. It's the beating heart of Vienna! 🔔🌟
+              </p>
+            </div>
+            <div class="attraction-card">
+              <div class="polaroid-tape"></div>
+              <div class="attraction-header">
+                <span class="attraction-icon">☕</span>
+                <h3 class="attraction-title">Legendary Coffeehouse Culture</h3>
+              </div>
+              <img
+                alt="Café Central Vienna"
+                class="attraction-image"
+                src="img/Caf__Central_Vienna.jpeg"
+              />
+              <p class="attraction-description">
+                Vienna's coffeehouse culture is a UNESCO World Heritage
+                tradition! Café Central and Demel are temples of elegance where
+                you can sip perfect Wiener Melange while reading newspapers and
+                people-watching for hours. The marble tables, plush red
+                banquettes, and the aroma of fresh coffee create pure old-world
+                sophistication. Order a slice of Sachertorte and embrace the art
+                of doing absolutely nothing – it's wonderfully Viennese! ☕🍰
+              </p>
+            </div>
+            <div
+              class="side-quest-card"
+              style="
+                display: flex;
+                align-items: flex-start;
+                gap: 28px;
+                flex-wrap: wrap;
+              "
+            >
+              <div style="flex: 2 1 260px; min-width: 220px">
+                <div class="side-quest-header">Artistic Side Quest</div>
+                <p class="side-quest-description">
+                  Explore the psychedelic Hundertwasserhaus – this
+                  rainbow-colored apartment building looks like it escaped from
+                  a children's storybook! Friedensreich Hundertwasser designed
+                  this architectural wonder with wonky floors, irregular
+                  windows, and rooftop gardens that defy all conventional rules.
+                  It's wonderfully weird, totally Instagram-worthy, and proves
+                  that Vienna isn't just about imperial grandeur. The nearby
+                  Hundertwasser Village has quirky shops and cafés! 🌈🏠
+                </p>
+              </div>
+              <img
+                alt="Hundertwasserhaus Vienna"
+                src="img/Hundertwasserhaus_Vienna.jpg"
+                style="
+                  flex: 1 1 180px;
+                  width: 100%;
+                  max-width: 340px;
+                  height: 180px;
+                  object-fit: cover;
+                  border-radius: 14px;
+                  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+                  border: 4px solid #fff;
+                  margin: 0;
+                "
+              />
+            </div>
+          </div>
+          <div
+            class="food-section"
+            style="
+              margin-top: 25px;
+              background: #fff3cd;
+              padding: 20px;
+              border-radius: 10px;
+              border-left: 5px solid #ffc107;
+            "
+          >
+            <h3
+              style="
+                color: #856404;
+                margin-bottom: 15px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+              "
+            >
+              <span>🍽️</span>Local Flavors
+            </h3>
+            <div
+              class="food-grid"
+              style="
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 15px;
+              "
+            >
+              <div style="text-align: center">
+                <img
+                  alt="Käsespätzle"
+                  src="img/K_sesp_tzle.jpg"
+                  style="
+                    width: 100%;
+                    height: 100px;
+                    object-fit: cover;
+                    border-radius: 8px;
+                    margin-bottom: 8px;
+                  "
+                />
+                <p style="font-size: 0.9em; margin: 0">
+                  <strong>Käsespätzle</strong><br />Austrian mac and cheese with
+                  crispy onions - pure comfort.
+                </p>
+              </div>
+              <div style="text-align: center">
+                <img
+                  alt="Palatschinken"
+                  src="img/Palatschinken_1.jpg"
+                  style="
+                    width: 100%;
+                    height: 100px;
+                    object-fit: cover;
+                    border-radius: 8px;
+                    margin-bottom: 8px;
+                  "
+                />
+                <p style="font-size: 0.9em; margin: 0">
+                  <strong>Palatschinken</strong><br />Thin crepes filled with
+                  jam, cheese, or sweet surprises.
+                </p>
+              </div>
+              <div style="text-align: center">
+                <img
+                  alt="Wiener Melange"
+                  src="img/Wiener_Melange.jpg"
+                  style="
+                    width: 100%;
+                    height: 100px;
+                    object-fit: cover;
+                    border-radius: 8px;
+                    margin-bottom: 8px;
+                  "
+                />
+                <p style="font-size: 0.9em; margin: 0">
+                  <strong>Wiener Melange</strong><br />Vienna's signature coffee
+                  with steamed milk and foam.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="tape tape2"></div>
+        </div>
+        <div class="journey-stats">
+          <div class="stats-tape stats-tape1"></div>
+          <div class="stats-tape stats-tape2"></div>
+          <div class="stats-header">
+            <span class="stats-emoji">📊</span>
+            <h2>Epic Journey by the Numbers!</h2>
+            <span class="stats-emoji">🎯</span>
+          </div>
+          <div class="stats-grid">
+            <div class="stat-item">
+              <div class="stat-icon">🚂</div>
+              <div class="stat-number">7</div>
+              <div class="stat-label">Cities Explored</div>
+              <div class="stat-detail">
+                Milan → Verona → Trento → Innsbruck → Munich → Salzburg → Vienna
+              </div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-icon">⏰</div>
+              <div class="stat-number">11.5h</div>
+              <div class="stat-label">Train Travel Time</div>
+              <div class="stat-detail">Pure scenic bliss on rails!</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-icon">🏰</div>
+              <div class="stat-number">6</div>
+              <div class="stat-label">Epic Castles &amp; Palaces</div>
+              <div class="stat-detail">From medieval to fairy-tale</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-icon">🍽️</div>
+              <div class="stat-number">15+</div>
+              <div class="stat-label">Local Delicacies</div>
+              <div class="stat-detail">Risotto, schnitzel &amp; strudel!</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-icon">🎭</div>
+              <div class="stat-number">18</div>
+              <div class="stat-label">Amazing Attractions</div>
+              <div class="stat-detail">From cathedrals to cable cars</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-icon">🎵</div>
+              <div class="stat-number">3</div>
+              <div class="stat-label">Musical Legends</div>
+              <div class="stat-detail">
+                Mozart, La Scala &amp; Sound of Music
+              </div>
+            </div>
+          </div>
+          <div class="stats-footer">
+            <div class="stats-quote">
+              "✨ Adventures are the best way to learn ✨"
+            </div>
+            <div class="stats-subtext">
+              An unforgettable journey through the heart of Europe! 🇮🇹🇦🇹🇩🇪
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-
     <script>
-        // Add some interactive elements
-        document.querySelectorAll('.city-stop').forEach(stop => {
-            stop.addEventListener('mouseenter', function() {
-                this.style.transform = 'rotate(0deg) scale(1.02)';
-            });
-            stop.addEventListener('mouseleave', function() {
-                const isEven = Array.from(this.parentElement.children).indexOf(this) % 2 === 0;
-                this.style.transform = isEven ? 'rotate(-0.5deg)' : 'rotate(0.5deg)';
-            });
+      // Add some interactive elements
+      document.querySelectorAll(".city-stop").forEach((stop) => {
+        stop.addEventListener("mouseenter", function () {
+          this.style.transform = "rotate(0deg) scale(1.02)";
         });
-
-        // Add click interactions to photo placeholders
-        document.querySelectorAll('.photo-placeholder').forEach(photo => {
-            photo.addEventListener('click', function() {
-                this.style.background = `linear-gradient(135deg, #${Math.floor(Math.random()*16777215).toString(16)} 0%, #${Math.floor(Math.random()*16777215).toString(16)} 100%)`;
-            });
+        stop.addEventListener("mouseleave", function () {
+          const isEven =
+            Array.from(this.parentElement.children).indexOf(this) % 2 === 0;
+          this.style.transform = isEven ? "rotate(-0.5deg)" : "rotate(0.5deg)";
         });
+      });
 
-        // Image zoom modal logic
-        (function() {
-            // Only show the helper text once per session
-            let hasDismissed = false;
-            if (window.sessionStorage.getItem('imageZoomDismissed')) {
-                hasDismissed = true;
-            }
+      // Add click interactions to photo placeholders
+      document.querySelectorAll(".photo-placeholder").forEach((photo) => {
+        photo.addEventListener("click", function () {
+          this.style.background = `linear-gradient(135deg, #${Math.floor(
+            Math.random() * 16777215
+          ).toString(16)} 0%, #${Math.floor(Math.random() * 16777215).toString(
+            16
+          )} 100%)`;
+        });
+      });
 
-            // Create modal elements
-            const modalBg = document.createElement('div');
-            modalBg.id = 'image-zoom-modal-bg';
-            modalBg.style.cssText = `
+      // Image zoom modal logic
+      (function () {
+        // Only show the helper text once per session
+        let hasDismissed = false;
+        if (window.sessionStorage.getItem("imageZoomDismissed")) {
+          hasDismissed = true;
+        }
+
+        // Create modal elements
+        const modalBg = document.createElement("div");
+        modalBg.id = "image-zoom-modal-bg";
+        modalBg.style.cssText = `
                 display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100vw; height: 100vh;
                 background: rgba(40,40,40,0.85); justify-content: center; align-items: center; flex-direction: column;
             `;
 
-            const modalImg = document.createElement('img');
-            modalImg.id = 'image-zoom-modal-img';
-            modalImg.style.cssText = `
+        const modalImg = document.createElement("img");
+        modalImg.id = "image-zoom-modal-img";
+        modalImg.style.cssText = `
                 max-width: 90vw; max-height: 80vh; border-radius: 16px; box-shadow: 0 8px 32px rgba(0,0,0,0.4); background: #fff; object-fit: contain;
             `;
 
-            // Dismiss helper text
-            const helperText = document.createElement('div');
-            helperText.id = 'image-zoom-helper-text';
-            helperText.textContent = 'tap here  to dismiss';
-            helperText.style.cssText = `
+        // Dismiss helper text
+        const helperText = document.createElement("div");
+        helperText.id = "image-zoom-helper-text";
+        helperText.textContent = "tap here  to dismiss";
+        helperText.style.cssText = `
                 color: #fff; font-size: 1.2em; margin-top: 32px; opacity: 0.85; background: rgba(0,0,0,0.18); padding: 8px 22px; border-radius: 8px; pointer-events: none;
                 transition: opacity 0.3s;
             `;
 
-            // X close button
-            const closeBtn = document.createElement('button');
-            closeBtn.textContent = '×';
-            closeBtn.setAttribute('aria-label', 'Close');
-            closeBtn.style.cssText = `
+        // X close button
+        const closeBtn = document.createElement("button");
+        closeBtn.textContent = "×";
+        closeBtn.setAttribute("aria-label", "Close");
+        closeBtn.style.cssText = `
                 position: absolute; top: 32px; right: 48px; font-size: 2.5em; color: #fff; background: none; border: none; cursor: pointer; z-index: 10001; font-family: inherit; opacity: 0.85;
             `;
 
-            modalBg.appendChild(modalImg);
-            modalBg.appendChild(closeBtn);
-            if (!hasDismissed) {
-                modalBg.appendChild(helperText);
-            }
-            modalBg.style.display = 'none';
-            modalBg.style.alignItems = 'center';
-            modalBg.style.justifyContent = 'center';
-            modalBg.style.flexDirection = 'column';
-            modalBg.style.gap = '0';
-            modalBg.style.cursor = 'pointer';
-            document.body.appendChild(modalBg);
+        modalBg.appendChild(modalImg);
+        modalBg.appendChild(closeBtn);
+        if (!hasDismissed) {
+          modalBg.appendChild(helperText);
+        }
+        modalBg.style.display = "none";
+        modalBg.style.alignItems = "center";
+        modalBg.style.justifyContent = "center";
+        modalBg.style.flexDirection = "column";
+        modalBg.style.gap = "0";
+        modalBg.style.cursor = "pointer";
+        document.body.appendChild(modalBg);
 
-            // Show modal
-            function showModal(src, alt) {
-                modalImg.src = src;
-                modalImg.alt = alt || '';
-                modalBg.style.display = 'flex';
-                setTimeout(() => { modalBg.style.opacity = '1'; }, 10);
-            }
+        // Show modal
+        function showModal(src, alt) {
+          modalImg.src = src;
+          modalImg.alt = alt || "";
+          modalBg.style.display = "flex";
+          setTimeout(() => {
+            modalBg.style.opacity = "1";
+          }, 10);
+        }
 
-            // Hide modal
-            function hideModal() {
-                modalBg.style.display = 'none';
-                if (!hasDismissed) {
-                    hasDismissed = true;
-                    window.sessionStorage.setItem('imageZoomDismissed', '1');
-                    if (helperText.parentNode) helperText.parentNode.removeChild(helperText);
-                }
-            }
+        // Hide modal
+        function hideModal() {
+          modalBg.style.display = "none";
+          if (!hasDismissed) {
+            hasDismissed = true;
+            window.sessionStorage.setItem("imageZoomDismissed", "1");
+            if (helperText.parentNode)
+              helperText.parentNode.removeChild(helperText);
+          }
+        }
 
-            // Click on background (not image or X) closes
-            modalBg.addEventListener('click', function(e) {
-                if (e.target === modalBg || e.target === helperText) {
-                    hideModal();
-                }
-            });
-            // X button closes
-            closeBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                hideModal();
-            });
-            // Prevent click on image from closing
-            modalImg.addEventListener('click', function(e) {
-                e.stopPropagation();
-            });
+        // Click on background (not image or X) closes
+        modalBg.addEventListener("click", function (e) {
+          if (e.target === modalBg || e.target === helperText) {
+            hideModal();
+          }
+        });
+        // X button closes
+        closeBtn.addEventListener("click", function (e) {
+          e.stopPropagation();
+          hideModal();
+        });
+        // Prevent click on image from closing
+        modalImg.addEventListener("click", function (e) {
+          e.stopPropagation();
+        });
 
-            // Add click listeners to all .attraction-image and .zoomable-image
-document.querySelectorAll('.attraction-image, .zoomable-image, .food-grid img').forEach(img => {
-                img.style.cursor = 'zoom-in';
-                img.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    showModal(this.src, this.alt);
-                });
+        // Add click listeners to all .attraction-image and .zoomable-image
+        document
+          .querySelectorAll(
+            ".attraction-image, .zoomable-image, .food-grid img"
+          )
+          .forEach((img) => {
+            img.style.cursor = "zoom-in";
+            img.addEventListener("click", function (e) {
+              e.stopPropagation();
+              showModal(this.src, this.alt);
             });
-        })();
+          });
+      })();
     </script>
-</body>
+  </body>
 </html>
