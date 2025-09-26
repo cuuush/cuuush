@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DesignFlow - Visual Collaboration Platform</title>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J7W9T5WRPR"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-J7W9T5WRPR', {
+        debug_mode: true,
+        send_page_view: true
+    });
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .cta-btn {
+            background: #667eea;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .cta-btn:hover {
+            background: #5a67d8;
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .workspace {
+            background: white;
+            margin: 2rem auto;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            max-width: 1000px;
+        }
+
+        .toolbar {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 12px;
+        }
+
+        .tool {
+            padding: 0.8rem 1.2rem;
+            border: none;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .tool:hover, .tool.active {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .canvas {
+            height: 400px;
+            background: #fafbfc;
+            border: 2px dashed #e2e8f0;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            cursor: crosshair;
+        }
+
+        .canvas-element {
+            position: absolute;
+            padding: 1rem;
+            border-radius: 8px;
+            cursor: move;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .canvas-element:hover {
+            transform: scale(1.05);
+        }
+
+        .shape {
+            background: #667eea;
+            color: white;
+        }
+
+        .text-box {
+            background: #f7fafc;
+            border: 2px solid #e2e8f0;
+            color: #2d3748;
+        }
+
+        .sidebar {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+            width: 250px;
+        }
+
+        .sidebar h3 {
+            margin-bottom: 1rem;
+            color: #2d3748;
+        }
+
+        .feature {
+            padding: 0.8rem;
+            margin-bottom: 0.5rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .feature:hover {
+            background: #e2e8f0;
+        }
+
+        .premium {
+            border: 2px solid #ffd700;
+            background: linear-gradient(45deg, #fff9c4, #fef5e7);
+        }
+
+        .pricing-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 500px;
+        }
+
+        .price {
+            font-size: 3rem;
+            color: #667eea;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: white;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                position: static;
+                width: 100%;
+                margin: 2rem auto;
+                transform: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">DesignFlow</div>
+            <ul class="nav-links">
+                <li><a href="#" data-page="templates">Templates</a></li>
+                <li><a href="#" data-page="features">Features</a></li>
+                <li><a href="#" data-page="pricing">Pricing</a></li>
+                <li><a href="#" data-page="help">Help</a></li>
+            </ul>
+            <button class="cta-btn" id="signupBtn">Sign Up Free</button>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Create Together, Design Better</h1>
+        <p>The ultimate visual collaboration platform for teams who want to build amazing things</p>
+        <button class="cta-btn" id="startDesigning">Start Designing Now</button>
+    </section>
+
+    <div class="workspace">
+        <div class="toolbar">
+            <button class="tool active" data-tool="select">Select</button>
+            <button class="tool" data-tool="rectangle">Rectangle</button>
+            <button class="tool" data-tool="circle">Circle</button>
+            <button class="tool" data-tool="text">Text</button>
+            <button class="tool" data-tool="line">Line</button>
+            <button class="tool premium" data-tool="ai-design">🤖 AI Design</button>
+            <button class="tool premium" data-tool="collaboration">👥 Live Collab</button>
+        </div>
+
+        <div class="canvas" id="canvas">
+            <div style="color: #9ca3af;">Click tools above to start creating</div>
+            <div class="canvas-element shape" style="top: 50px; left: 100px;">Shape 1</div>
+            <div class="canvas-element text-box" style="top: 150px; left: 300px;">Text Box</div>
+        </div>
+    </div>
+
+    <div class="sidebar">
+        <h3>Features</h3>
+        <div class="feature" data-feature="basic-shapes">Basic Shapes</div>
+        <div class="feature" data-feature="templates">Design Templates</div>
+        <div class="feature" data-feature="export">Export to PNG/PDF</div>
+        <div class="feature premium" data-feature="advanced-tools">Advanced Tools</div>
+        <div class="feature premium" data-feature="team-sharing">Team Sharing</div>
+        <div class="feature premium" data-feature="version-history">Version History</div>
+        <div class="feature premium" data-feature="api-integration">API Integration</div>
+
+        <div style="margin-top: 2rem;">
+            <button class="cta-btn" style="width: 100%;" id="upgradePremium">Upgrade to Premium</button>
+        </div>
+    </div>
+
+    <div class="pricing-modal" id="pricingModal">
+        <div class="modal-content">
+            <h2>Upgrade to Premium</h2>
+            <div class="price">$19<span style="font-size: 1rem;">/month</span></div>
+            <ul style="text-align: left; margin: 2rem 0;">
+                <li>✅ Unlimited projects</li>
+                <li>✅ Advanced design tools</li>
+                <li>✅ Real-time collaboration</li>
+                <li>✅ Priority support</li>
+                <li>✅ API access</li>
+            </ul>
+            <button class="cta-btn" id="purchasePremium">Purchase Premium</button>
+            <button onclick="closePricingModal()" style="margin-left: 1rem;">Cancel</button>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 DesignFlow. Built for creative teams everywhere.</p>
+    </footer>
+
+    <script>
+        // Track user sessions and engagement
+        let sessionStartTime = Date.now();
+        let currentTool = 'select';
+        let elementsCreated = 0;
+        let collaborationTime = 0;
+
+        // Console logging for debugging
+        function logEvent(eventName, parameters) {
+            console.log(`🔥 GA Event: ${eventName}`, parameters);
+        }
+
+        // Track page views with custom dimensions
+        gtag('config', 'G-J7W9T5WRPR', {
+            custom_map: {
+                'custom_dimension_1': 'user_type',
+                'custom_dimension_2': 'subscription_tier',
+                'custom_dimension_3': 'team_size'
+            }
+        });
+
+        // Set user properties
+        gtag('set', {
+            'user_type': 'free_trial',
+            'subscription_tier': 'free',
+            'team_size': '1-5'
+        });
+
+        // Navigation tracking
+        document.querySelectorAll('[data-page]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const page = this.dataset.page;
+
+                const eventData = {
+                    page_title: `DesignFlow - ${page.charAt(0).toUpperCase() + page.slice(1)}`,
+                    page_location: `http://localhost:8000/${page}`,
+                    content_group1: 'navigation',
+                    content_group2: page
+                };
+                logEvent('page_view', eventData);
+                gtag('event', 'page_view', eventData);
+
+                gtag('event', 'navigation_click', {
+                    event_category: 'Navigation',
+                    event_label: page,
+                    value: 1
+                });
+            });
+        });
+
+        // Tool usage tracking
+        document.querySelectorAll('[data-tool]').forEach(tool => {
+            tool.addEventListener('click', function() {
+                const toolName = this.dataset.tool;
+                const isPremium = this.classList.contains('premium');
+
+                // Remove active class from all tools
+                document.querySelectorAll('.tool').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+
+                currentTool = toolName;
+
+                if (isPremium) {
+                    gtag('event', 'premium_feature_attempt', {
+                        event_category: 'Premium Features',
+                        event_label: toolName,
+                        value: 1,
+                        custom_parameter: 'upsell_opportunity'
+                    });
+
+                    // Show upgrade prompt
+                    document.getElementById('pricingModal').style.display = 'block';
+                } else {
+                    gtag('event', 'tool_selection', {
+                        event_category: 'Design Tools',
+                        event_label: toolName,
+                        value: 1
+                    });
+                }
+            });
+        });
+
+        // Canvas interaction tracking
+        document.getElementById('canvas').addEventListener('click', function(e) {
+            if (currentTool !== 'select') {
+                elementsCreated++;
+
+                gtag('event', 'element_created', {
+                    event_category: 'Design Activity',
+                    event_label: currentTool,
+                    value: elementsCreated
+                });
+
+                gtag('event', 'user_engagement', {
+                    event_category: 'Engagement',
+                    event_label: 'canvas_interaction',
+                    value: Math.floor((Date.now() - sessionStartTime) / 1000)
+                });
+            }
+        });
+
+        // Feature usage tracking
+        document.querySelectorAll('[data-feature]').forEach(feature => {
+            feature.addEventListener('click', function() {
+                const featureName = this.dataset.feature;
+                const isPremium = this.classList.contains('premium');
+
+                if (isPremium) {
+                    gtag('event', 'premium_feature_click', {
+                        event_category: 'Premium Features',
+                        event_label: featureName,
+                        value: 1
+                    });
+                    document.getElementById('pricingModal').style.display = 'block';
+                } else {
+                    gtag('event', 'feature_usage', {
+                        event_category: 'Features',
+                        event_label: featureName,
+                        value: 1
+                    });
+                }
+            });
+        });
+
+        // Conversion tracking
+        document.getElementById('signupBtn').addEventListener('click', function() {
+            gtag('event', 'sign_up', {
+                event_category: 'Conversion',
+                event_label: 'header_cta',
+                value: 1
+            });
+
+            gtag('event', 'conversion', {
+                send_to: 'G-J7W9T5WRPR/sign_up'
+            });
+        });
+
+        document.getElementById('startDesigning').addEventListener('click', function() {
+            gtag('event', 'sign_up', {
+                event_category: 'Conversion',
+                event_label: 'hero_cta',
+                value: 1
+            });
+        });
+
+        document.getElementById('upgradePremium').addEventListener('click', function() {
+            document.getElementById('pricingModal').style.display = 'block';
+
+            gtag('event', 'begin_checkout', {
+                event_category: 'Ecommerce',
+                currency: 'USD',
+                value: 19,
+                items: [{
+                    item_id: 'premium_monthly',
+                    item_name: 'Premium Monthly Subscription',
+                    category: 'subscription',
+                    quantity: 1,
+                    price: 19
+                }]
+            });
+        });
+
+        document.getElementById('purchasePremium').addEventListener('click', function() {
+            gtag('event', 'purchase', {
+                event_category: 'Ecommerce',
+                transaction_id: 'TXN_' + Date.now(),
+                value: 19,
+                currency: 'USD',
+                items: [{
+                    item_id: 'premium_monthly',
+                    item_name: 'Premium Monthly Subscription',
+                    category: 'subscription',
+                    quantity: 1,
+                    price: 19
+                }]
+            });
+
+            gtag('event', 'conversion', {
+                send_to: 'G-J7W9T5WRPR/purchase'
+            });
+
+            alert('🎉 Welcome to Premium! (This is just a demo)');
+            document.getElementById('pricingModal').style.display = 'none';
+        });
+
+        function closePricingModal() {
+            document.getElementById('pricingModal').style.display = 'none';
+        }
+
+        // Session tracking
+        gtag('event', 'session_start', {
+            event_category: 'Engagement',
+            value: 1
+        });
+
+        // Track time on page
+        setInterval(() => {
+            const timeOnPage = Math.floor((Date.now() - sessionStartTime) / 1000);
+
+            if (timeOnPage % 30 === 0) { // Every 30 seconds
+                gtag('event', 'page_engagement', {
+                    event_category: 'Engagement',
+                    event_label: 'time_on_page',
+                    value: timeOnPage
+                });
+            }
+        }, 1000);
+
+        // Scroll tracking
+        let maxScroll = 0;
+        window.addEventListener('scroll', function() {
+            const scrollPercent = Math.round(
+                (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100
+            );
+
+            if (scrollPercent > maxScroll) {
+                maxScroll = scrollPercent;
+
+                if (maxScroll === 25 || maxScroll === 50 || maxScroll === 75 || maxScroll === 100) {
+                    gtag('event', 'scroll_depth', {
+                        event_category: 'Engagement',
+                        event_label: `${maxScroll}%`,
+                        value: maxScroll
+                    });
+                }
+            }
+        });
+
+        // Track when user leaves
+        window.addEventListener('beforeunload', function() {
+            const sessionDuration = Math.floor((Date.now() - sessionStartTime) / 1000);
+
+            gtag('event', 'session_end', {
+                event_category: 'Engagement',
+                value: sessionDuration,
+                custom_parameter_1: elementsCreated,
+                custom_parameter_2: currentTool
+            });
+        });
+
+        // Simulate some realistic user behavior for demo
+        setTimeout(() => {
+            gtag('event', 'user_retention', {
+                event_category: 'Engagement',
+                event_label: '30_second_retention',
+                value: 1
+            });
+        }, 30000);
+
+        // Error tracking
+        window.addEventListener('error', function(e) {
+            gtag('event', 'exception', {
+                description: e.message,
+                fatal: false
+            });
+        });
+    </script>
+</body>
+</html>
